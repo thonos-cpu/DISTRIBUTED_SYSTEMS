@@ -127,7 +127,7 @@ class DHT:
             d_succ[k] = d_node.pop(k)
 
         self.nodes.remove(node)
-
+        #test successful
         self._link_ring()
         ids = self._sorted_ids()
         self._rebuild_finger_tables(ids)
