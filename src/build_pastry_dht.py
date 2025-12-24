@@ -65,7 +65,7 @@ if __name__ == "__main__":
     # Interactive lookup
     while True:
         title = input("\nΔώσε τίτλο ταινίας (!@ για έξοδο): ")
-        if title() == "!@":
+        if title.lower() == "!@":
             break
 
         movies = dht.get(title)
