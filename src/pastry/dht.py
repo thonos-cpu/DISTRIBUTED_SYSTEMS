@@ -41,6 +41,20 @@ class PastryDHT:
         node = self.route_to_node(key)
         node.data[title].append(value)
         return node
+    
+    def update(self, key: str, new_attrs: dict) -> bool:
+        """
+        Update existing key with new attributes.
+        Returns True if update happened, False if key not found.
+        """
+        node = self.route_to_node(key)
+
+        if key not in node.data:
+            return False
+
+        node.data[key] = new_attrs
+        return True
+
 
     def get(self, title: str):
         """
