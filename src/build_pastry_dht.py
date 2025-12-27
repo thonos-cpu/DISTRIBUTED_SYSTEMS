@@ -155,17 +155,27 @@ if __name__ == "__main__":
     demo_title, demo_id, demo_attrs = all_movies[0]
 
     print("\n[UPDATE DEMO]")
-    print("Before update:")
-    print(dht.get(demo_title)[0])
 
-    updated_attrs = demo_attrs.copy()
-    updated_attrs["year"] = 2025
+    movies = dht.get(demo_title)
+    target = [m for m in movies if m["id"] == demo_id][0]
+
+    print("Before update:")
+    print(target)
+
+    updated_attrs = target.copy()
+    updated_attrs["popularity"] += 10
+    updated_attrs["vote_average"] = min(updated_attrs["vote_average"] + 1, 10)
     updated_attrs["updated"] = True
 
-    dht.update(demo_title, updated_attrs)
+    dht.update(demo_title, demo_id, updated_attrs)
+
+    movies_after = dht.get(demo_title)
+    target_after = [m for m in movies_after if m["id"] == demo_id][0]
 
     print("After update:")
-    print(dht.get(demo_title)[0])
+    print(target_after)
+
+
 
 
     # ===============================
@@ -184,10 +194,11 @@ if __name__ == "__main__":
         new_attrs["updated"] = True
 
         start = time.perf_counter()
-        dht.update(title, new_attrs)
+        dht.update(title, movie_id, new_attrs)
         end = time.perf_counter()
 
         update_times.append(end - start)
+
 
     avg_update = sum(update_times) / len(update_times)
 

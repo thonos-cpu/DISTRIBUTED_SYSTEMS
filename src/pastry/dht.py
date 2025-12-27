@@ -42,18 +42,23 @@ class PastryDHT:
         node.data[title].append(value)
         return node
     
-    def update(self, key: str, new_attrs: dict) -> bool:
+    def update(self, title: str, movie_id: int, new_attrs: dict) -> bool:
         """
-        Update existing key with new attributes.
-        Returns True if update happened, False if key not found.
+        Update a specific movie (by title + id).
         """
+        key = (title, movie_id)
         node = self.route_to_node(key)
 
-        if key not in node.data:
+        if title not in node.data:
             return False
 
-        node.data[key] = new_attrs
-        return True
+        for i, movie in enumerate(node.data[title]):
+            if movie.get("id") == movie_id:
+                node.data[title][i] = new_attrs
+                return True
+
+        return False
+
 
 
     def get(self, title: str):
