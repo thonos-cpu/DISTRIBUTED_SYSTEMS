@@ -206,9 +206,51 @@ if __name__ == "__main__":
       f"{avg_update:.6f} sec")
 
 
+    # ===============================
+    # DELETE DEMO (before / after)
+    # ===============================
+    demo_title, demo_id, _ = all_movies[1]
+
+    print("\n[DELETE DEMO]")
+
+    movies_before = dht.get(demo_title)
+    print(f"Before delete ({len(movies_before)} movies):")
+    for m in movies_before:
+        print(f"  - {m['title']} ({m['id']})")
+
+    dht.delete(demo_title, demo_id)
+
+    movies_after = dht.get(demo_title)
+    print(f"\nAfter delete ({len(movies_after)} movies):")
+    for m in movies_after:
+        print(f"  - {m['title']} ({m['id']})")
 
 
-    # --- Interactive lookup ---
+
+
+    # ===============================
+    # DELETE BENCHMARK
+    # ===============================
+    NUM_DELETES = 100
+
+    print("\nRunning delete benchmark...")
+
+    delete_times = []
+    sample_movies = random.sample(all_movies, NUM_DELETES)
+
+    for title, movie_id, _ in sample_movies:
+        start = time.perf_counter()
+        dht.delete(title, movie_id)
+        end = time.perf_counter()
+        delete_times.append(end - start)
+
+    avg_delete = sum(delete_times) / len(delete_times)
+
+    print(f"[DELETE] Average delete time over {NUM_DELETES} deletes: "
+        f"{avg_delete:.6f} sec")
+
+
+    # --- Interactive lookup ----------------------------------------------------------------------
     while True:
         title = input("\nΔώσε τίτλο ταινίας (!@ για έξοδο): ")
         if title == "!@":
