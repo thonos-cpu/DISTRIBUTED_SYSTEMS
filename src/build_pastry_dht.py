@@ -154,7 +154,7 @@ if __name__ == "__main__":
     # ===============================
     demo_title, demo_id, demo_attrs = all_movies[0]
 
-    print("\n[UPDATE DEMO]")
+    print("\n------[UPDATE DEMO]------")
 
     movies = dht.get(demo_title)
     target = [m for m in movies if m["id"] == demo_id][0]
@@ -211,7 +211,7 @@ if __name__ == "__main__":
     # ===============================
     demo_title, demo_id, _ = all_movies[1]
 
-    print("\n[DELETE DEMO]")
+    print("\n------[DELETE DEMO]------")
 
     movies_before = dht.get(demo_title)
     print(f"Before delete ({len(movies_before)} movies):")
@@ -248,6 +248,85 @@ if __name__ == "__main__":
 
     print(f"[DELETE] Average delete time over {NUM_DELETES} deletes: "
         f"{avg_delete:.6f} sec")
+    
+
+
+    # ===============================
+    # NODE JOIN DEMO
+    # ===============================
+    print("\n------[NODE JOIN DEMO]-------")
+
+    initial_nodes = len(dht.nodes)
+    print(f"Nodes before join: {initial_nodes}")
+
+    t_join_start = time.perf_counter()
+    dht.join("NewNode_1")
+    t_join_end = time.perf_counter()
+
+    print(f"Nodes after join: {len(dht.nodes)}")
+    print(f"[JOIN TIME] {t_join_end - t_join_start:.6f} sec")
+
+
+    # ===============================
+    # NODE LEAVE DEMO
+    # ===============================
+    print("\n------[NODE LEAVE DEMO]------")
+
+    # κρατάμε reference στο node
+    node_to_leave = dht.nodes[0]
+    leave_id = node_to_leave.id
+
+    print("Node ID that will leave:", node_to_leave.id_str)
+
+    print("Sample node IDs BEFORE leave:")
+    print([n.id_str for n in dht.nodes[:5]])
+
+    nodes_before = len(dht.nodes)
+
+    t_leave_start = time.perf_counter()
+    dht.leave(leave_id)
+    t_leave_end = time.perf_counter()
+
+    print("Sample node IDs AFTER leave:")
+    print([n.id_str for n in dht.nodes[:5]])
+
+    nodes_after = len(dht.nodes)
+
+    print(f"Nodes before leave: {nodes_before}")
+    print(f"Nodes after leave: {nodes_after}")
+    print(f"[LEAVE TIME] {t_leave_end - t_leave_start:.6f} sec")
+
+    # απόλυτη απόδειξη
+    exists = any(n.id == leave_id for n in dht.nodes)
+    print("Does left node still exist?", exists)
+
+
+
+    # ===============================
+    # NODE JOIN / LEAVE BENCHMARK
+    # ===============================
+    NUM_NODE_EVENTS = 10
+    join_times = []
+    leave_times = []
+
+    for i in range(NUM_NODE_EVENTS):
+        name = f"TempNode_{i}"
+
+        t1 = time.perf_counter()
+        dht.join(name)
+        t2 = time.perf_counter()
+        join_times.append(t2 - t1)
+
+        t3 = time.perf_counter()
+        dht.leave(name)
+        t4 = time.perf_counter()
+        leave_times.append(t4 - t3)
+
+    print(f"[JOIN] Avg time: {sum(join_times)/len(join_times):.6f} sec")
+    print(f"[LEAVE] Avg time: {sum(leave_times)/len(leave_times):.6f} sec")
+
+
+
 
 
     # --- Interactive lookup ----------------------------------------------------------------------

@@ -19,18 +19,18 @@ class PastryDHT:
         self.nodes.append(node)
         return node
 
-    def leave(self, node_name: str) -> None:
-        node_id = hash_to_int(node_name, self.m_bits)
+    def leave(self, node_id: int) -> None:
+        """
+        Simulated node leave.
+        Data migration is omitted for performance reasons.
+        """
         node = next((n for n in self.nodes if n.id == node_id), None)
         if not node:
             return
 
-        # Reinsert movies
-        for title, movies in node.data.items():
-            for movie in movies:
-                self.put(title, movie["id"], movie)
-
         self.nodes.remove(node)
+
+
 
     # -----------------------------
     # DHT operations

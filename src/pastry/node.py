@@ -1,6 +1,7 @@
 from typing import Dict, List, Any, Optional
 from collections import defaultdict
 
+
 class Node:
     def __init__(self, node_id: int, b: int = 4, leaf_size: int = 4):
         self.id: int = node_id
