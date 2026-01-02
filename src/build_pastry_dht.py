@@ -121,6 +121,27 @@ if __name__ == "__main__":
 
 
     # ===============================
+    # PARALLEL LOOKUP BENCHMARK
+    # ===============================
+    print("\n------Running PARALLEL lookup benchmark------")
+
+    parallel_times = []
+
+    for title, _, _ in random_titles:
+        start = time.perf_counter()
+        dht.get_parallel(title)
+        end = time.perf_counter()
+        parallel_times.append(end - start)
+
+    avg_parallel = sum(parallel_times) / len(parallel_times)
+
+    print(f"[PARALLEL LOOKUP] Average time over {NUM_LOOKUPS} queries: "
+        f"{avg_parallel:.6f} sec")
+
+
+
+
+    # ===============================
     # INSERT BENCHMARK
     # ===============================
     NUM_INSERTS = 1000
