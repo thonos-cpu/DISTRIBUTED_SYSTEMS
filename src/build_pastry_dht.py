@@ -43,7 +43,7 @@ if __name__ == "__main__":
     # ===============================
     build_start = time.perf_counter()
 
-    print("Loading dataset size...")
+    print("------Loading dataset size------")
     n_rows = len(pd.read_csv(CSV_PATH))
     print(f"Total rows: {n_rows}")
 
@@ -100,7 +100,7 @@ if __name__ == "__main__":
     # ===============================
     NUM_LOOKUPS = 100
 
-    print("\nRunning lookup benchmark...")
+    print("\n------Running lookup benchmark------")
 
     # παίρνουμε τυχαίους τίτλους
     random_titles = random.sample(all_movies, NUM_LOOKUPS)
@@ -146,7 +146,7 @@ if __name__ == "__main__":
     # ===============================
     NUM_INSERTS = 1000
 
-    print("\nRunning insert benchmark...")
+    print("\n------Running insert benchmark------")
 
     insert_times = []
 
@@ -180,7 +180,7 @@ if __name__ == "__main__":
     movies = dht.get(demo_title)
     target = [m for m in movies if m["id"] == demo_id][0]
 
-    print("Before update:")
+    print("======Before update:")
     print(target)
 
     updated_attrs = target.copy()
@@ -193,7 +193,7 @@ if __name__ == "__main__":
     movies_after = dht.get(demo_title)
     target_after = [m for m in movies_after if m["id"] == demo_id][0]
 
-    print("After update:")
+    print("======After update:")
     print(target_after)
 
 
@@ -235,14 +235,14 @@ if __name__ == "__main__":
     print("\n------[DELETE DEMO]------")
 
     movies_before = dht.get(demo_title)
-    print(f"Before delete ({len(movies_before)} movies):")
+    print(f"------Before delete ({len(movies_before)} movies):")
     for m in movies_before:
         print(f"  - {m['title']} ({m['id']})")
 
     dht.delete(demo_title, demo_id)
 
     movies_after = dht.get(demo_title)
-    print(f"\nAfter delete ({len(movies_after)} movies):")
+    print(f"\n------After delete ({len(movies_after)} movies):")
     for m in movies_after:
         print(f"  - {m['title']} ({m['id']})")
 
@@ -254,7 +254,7 @@ if __name__ == "__main__":
     # ===============================
     NUM_DELETES = 100
 
-    print("\nRunning delete benchmark...")
+    print("\n------Running delete benchmark------")
 
     delete_times = []
     sample_movies = random.sample(all_movies, NUM_DELETES)
@@ -299,7 +299,7 @@ if __name__ == "__main__":
 
     print("Node ID that will leave:", node_to_leave.id_str)
 
-    print("Sample node IDs BEFORE leave:")
+    print("\nSample node IDs BEFORE leave:")
     print([n.id_str for n in dht.nodes[:5]])
 
     nodes_before = len(dht.nodes)
@@ -313,7 +313,7 @@ if __name__ == "__main__":
 
     nodes_after = len(dht.nodes)
 
-    print(f"Nodes before leave: {nodes_before}")
+    print(f"\nNodes before leave: {nodes_before}")
     print(f"Nodes after leave: {nodes_after}")
     print(f"[LEAVE TIME] {t_leave_end - t_leave_start:.6f} sec")
 
@@ -352,7 +352,7 @@ if __name__ == "__main__":
 
     # --- Interactive lookup ----------------------------------------------------------------------
     while True:
-        title = input("\nΔώσε τίτλο ταινίας (!@ για έξοδο): ")
+        title = input("\nΔώστε τίτλο ταινίας (!@ για έξοδο): ")
         if title == "!@":
             break
 
