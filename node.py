@@ -23,7 +23,7 @@ class Node:
 
     def find_successor(self, key_id: int):
         if self.successor is self:
-            return self, 1
+            return self, 0
 
         if in_range(key_id, self.id, self.successor.id, True):
             return self.successor, 1

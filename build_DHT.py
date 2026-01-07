@@ -74,13 +74,11 @@ if __name__ == "__main__":
 
     start = time.perf_counter()
 
-    for i, (k, v) in enumerate(d.nodes[80].data.items()):
-        if i == 5:
-            break
-        print(k, v)
-
-
-    print(d.get("The Life of Charles Peace"))
+    d.put("The Life of Charles Peace", 23)
+    d.put("The Life of Charles Peace", 24)
+    d.put("The Life of Charles Peace", 25)
+    for k, owner, val, hops in d.get("The Life of Charles Peace"):
+        print(k, val, owner, hops)
 
 
     end = time.perf_counter()

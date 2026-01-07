@@ -1,7 +1,8 @@
 import bisect
 from node import Node
+import re
 import xxhash
-from typing import Optional, List
+from typing import Dict, Optional, List, Any
 
 
 def in_range(k: int, a: int, b: int, inclusive_right: bool = True) -> bool:
@@ -178,8 +179,8 @@ class DHT:
 
         return new_node
 
-    def leave(self, node_name: str) -> None:
-        hashed = self._hash_node_id(node_name)
+    def leave(self, hashed: int) -> None:
+        
 
         node = None
         for n in self.nodes:
@@ -188,7 +189,7 @@ class DHT:
                 break
 
         if node is None:
-            raise ValueError(f"Node '{node_name}' is not part of this DHT")
+            raise ValueError(f"Node '{hashed}' is not part of this DHT")
 
         if len(self.nodes) == 1:
             node.data.clear()
@@ -205,16 +206,47 @@ class DHT:
             raise RuntimeError("Cannot put key into an empty DHT")
         h = self._hash_key(key)
         owner, _ = self.find_successor(h)
+        if owner.data.get(key) is not None:
+            m = re.fullmatch(r"(.*)\[(\d+)\]$", key)
+            if not m:
+                duplicate_key = key + "[1]"
+                return self.put(duplicate_key, value)
+            else:
+                base = m.group(1)
+                i = int(m.group(2)) + 1
+                duplicate_key = f"{base}[{i}]"
+                return self.put(duplicate_key, value)
+
         owner.data[key] = value
         return owner
 
     def get(self, key: str, default: any = None) -> any:
         if not self.nodes:
-            return default
-        h = self._hash_key(key)
-        owner, hops = self.find_successor(h)
-        return owner.data.get(key, default), hops
+            return []
 
+        results = []
+        k = key
+
+        while True:
+            h = self._hash_key(k)
+            owner, hops = self.find_successor(h)
+            val = owner.data.get(k, None)
+
+            if val is None:
+                break
+
+            results.append((k, owner, val, hops))
+
+            m = re.fullmatch(r"(.*)\[(\d+)\]$", k)
+            if m is None:
+                k = f"{key}[1]"
+            else:
+                base = m.group(1)
+                idx = int(m.group(2)) + 1
+                k = f"{base}[{idx}]"
+
+        return results
+    
     def delete(self, key: str) -> bool:
         if not self.nodes:
             return False
