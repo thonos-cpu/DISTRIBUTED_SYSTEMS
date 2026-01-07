@@ -21,15 +21,21 @@ class Node:
     def __repr__(self) -> str:
         return f"Node(id={self.id})"
 
-    def find_successor(self, key_id: int) -> "Node":
+    def find_successor(self, key_id: int):
         if self.successor is self:
-            return self
+            return self, 1
+
         if in_range(key_id, self.id, self.successor.id, True):
-            return self.successor
+            return self.successor, 1
+
         n0 = self.closest_preceding_node(key_id)
+
         if n0 is self:
-            return self.successor
-        return n0.find_successor(key_id)
+            return self.successor, 1
+
+        node, hops = n0.find_successor(key_id)
+        return node, hops + 1
+
 
     def closest_preceding_node(self, key_id: int) -> "Node":
         for finger in reversed(self.fingers):

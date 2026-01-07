@@ -74,9 +74,13 @@ if __name__ == "__main__":
 
     start = time.perf_counter()
 
-    d.leave("node99")
-    d.leave("node98")
-    print(len(d.nodes))
+    for i, (k, v) in enumerate(d.nodes[80].data.items()):
+        if i == 5:
+            break
+        print(k, v)
+
+
+    print(d.get("The Life of Charles Peace"))
 
 
     end = time.perf_counter()
