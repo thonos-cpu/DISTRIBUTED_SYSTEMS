@@ -1,8 +1,16 @@
+"""
+NOTE:
+Pastry routing is simulated at overlay level.
+Hop count is estimated based on Pastry theoretical complexity O(log_B N).
+"""
+
+
 from typing import Optional, Any, List
 from concurrent.futures import ThreadPoolExecutor
 
 from .node import Node
 from ..common.hash_utils import hash_to_int
+import math
 
 class PastryDHT:
     def __init__(self, m_bits: int = 64, b: int = 4):
@@ -88,21 +96,32 @@ class PastryDHT:
 
 
 
+    
+
     def get(self, title: str):
         results = []
-        hops = 0
+
+        # Pastry theoretical hops ≈ O(log_B N)
+        if len(self.nodes) > 1:
+            hops = math.ceil(math.log(len(self.nodes), 2 ** self.b))
+        else:
+            hops = 1
 
         for node in self.nodes:
-            hops += 1
             if title in node.data:
                 results.extend(node.data[title])
 
         return results, hops
 
-    
+
+
     def get_parallel(self, title: str):
         results = []
-        hops = len(self.nodes)
+
+        if len(self.nodes) > 1:
+            hops = math.ceil(math.log(len(self.nodes), 2 ** self.b))
+        else:
+            hops = 1
 
         def search_node(node):
             if title in node.data:
@@ -115,6 +134,7 @@ class PastryDHT:
                 results.extend(f.result())
 
         return results, hops
+
 
 
 

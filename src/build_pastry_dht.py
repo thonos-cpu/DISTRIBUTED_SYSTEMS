@@ -11,6 +11,7 @@ from tqdm import tqdm
 from src.pastry.dht import PastryDHT
 
 CSV_PATH = r"C:/Users/stavr/Decentralised Data/data/data_movies_clean_utf8.csv"
+BENCH_CSV_PATH = r"C:/Users/stavr/Decentralised Data/data/random_movie_names.csv"
 NUM_NODES = 100
 M_BITS = 64
 BATCH_SIZE = 50000
@@ -33,6 +34,11 @@ def process_chunk(start: int, end: int, csv_path: str):
 def insert_movies(dht: PastryDHT, movies):
     for title, movie_id, attrs in movies:
         dht.put(title, movie_id, attrs)
+
+def load_titles_from_csv(csv_path: str):
+    with open(csv_path, "r", encoding="utf-8") as f:
+        titles = [line.strip() for line in f if line.strip()]
+    return titles
 
 
 if __name__ == "__main__":
@@ -102,14 +108,16 @@ if __name__ == "__main__":
 
     print("\n------Running lookup benchmark------")
 
-    # παίρνουμε τυχαίους τίτλους
-    random_titles = random.sample(all_movies, NUM_LOOKUPS)
+    
+    csv_titles = load_titles_from_csv(BENCH_CSV_PATH)
+    lookup_titles = csv_titles[:NUM_LOOKUPS]
+
 
     lookup_times = []
     hop_counts = []
 
 
-    for title, movie_id, _ in random_titles:
+    for title in lookup_titles:
         start = time.perf_counter()
         _, hops = dht.get(title)
         end = time.perf_counter()
@@ -133,7 +141,7 @@ if __name__ == "__main__":
 
     parallel_times = []
 
-    for title, _, _ in random_titles:
+    for title in lookup_titles:
         start = time.perf_counter()
         dht.get_parallel(title)
         end = time.perf_counter()
