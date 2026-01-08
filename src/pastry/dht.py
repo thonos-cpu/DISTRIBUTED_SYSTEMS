@@ -89,22 +89,20 @@ class PastryDHT:
 
 
     def get(self, title: str):
-        """
-        Exact-match lookup by title.
-        Returns ALL movies with this title.
-        """
         results = []
+        hops = 0
+
         for node in self.nodes:
+            hops += 1
             if title in node.data:
                 results.extend(node.data[title])
-        return results
+
+        return results, hops
+
     
     def get_parallel(self, title: str):
-        """
-        Parallel exact-match lookup by title.
-        Queries all nodes concurrently.
-        """
         results = []
+        hops = len(self.nodes)
 
         def search_node(node):
             if title in node.data:
@@ -113,11 +111,11 @@ class PastryDHT:
 
         with ThreadPoolExecutor() as executor:
             futures = [executor.submit(search_node, node) for node in self.nodes]
-
             for f in futures:
                 results.extend(f.result())
 
-        return results
+        return results, hops
+
 
 
 

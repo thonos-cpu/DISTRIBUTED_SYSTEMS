@@ -55,7 +55,7 @@ if __name__ == "__main__":
         dht.join(f"Node{i}")
 
     t_nodes_end = time.perf_counter()
-    print(f"[TIME] Node creation: {t_nodes_end - t_nodes_start:.2f} sec")
+    print(f"[TIME] Node creation: {t_nodes_end - t_nodes_start:.6f} sec")
 
     # --- Dataset chunking ---
     chunks = list(make_chunks(n_rows, BATCH_SIZE))
@@ -106,14 +106,20 @@ if __name__ == "__main__":
     random_titles = random.sample(all_movies, NUM_LOOKUPS)
 
     lookup_times = []
+    hop_counts = []
+
 
     for title, movie_id, _ in random_titles:
         start = time.perf_counter()
-        dht.get(title)
+        _, hops = dht.get(title)
         end = time.perf_counter()
         lookup_times.append(end - start)
+        hop_counts.append(hops)
+
 
     avg_lookup = sum(lookup_times) / len(lookup_times)
+    print(f"Avg hops per lookup: {sum(hop_counts)/len(hop_counts):.2f}")
+
 
     print(f"[LOOKUP] Average lookup time over {NUM_LOOKUPS} queries: "
       f"{avg_lookup:.6f} sec")
@@ -177,7 +183,7 @@ if __name__ == "__main__":
 
     print("\n------[UPDATE DEMO]------")
 
-    movies = dht.get(demo_title)
+    movies, _ = dht.get(demo_title)
     target = [m for m in movies if m["id"] == demo_id][0]
 
     print("======Before update:")
@@ -190,7 +196,7 @@ if __name__ == "__main__":
 
     dht.update(demo_title, demo_id, updated_attrs)
 
-    movies_after = dht.get(demo_title)
+    movies_after, _ = dht.get(demo_title)
     target_after = [m for m in movies_after if m["id"] == demo_id][0]
 
     print("======After update:")
@@ -234,14 +240,14 @@ if __name__ == "__main__":
 
     print("\n------[DELETE DEMO]------")
 
-    movies_before = dht.get(demo_title)
+    movies_before, _ = dht.get(demo_title)
     print(f"------Before delete ({len(movies_before)} movies):")
     for m in movies_before:
         print(f"  - {m['title']} ({m['id']})")
 
     dht.delete(demo_title, demo_id)
 
-    movies_after = dht.get(demo_title)
+    movies_after, _ = dht.get(demo_title)
     print(f"\n------After delete ({len(movies_after)} movies):")
     for m in movies_after:
         print(f"  - {m['title']} ({m['id']})")
@@ -357,17 +363,29 @@ if __name__ == "__main__":
             break
 
         t_lookup_start = time.perf_counter()
-        movies = dht.get(title)
+        movies, hops = dht.get(title)
         t_lookup_end = time.perf_counter()
 
         if not movies:
             print("Δεν βρέθηκε ταινία")
             continue
 
-        print(f"Βρέθηκαν {len(movies)} ταινίες "
-              f"(lookup time: {t_lookup_end - t_lookup_start:.6f} sec):")
+        print(
+        f"Βρέθηκαν {len(movies)} ταινίες | "
+        f"hops: {hops} | "
+        f"lookup time: {t_lookup_end - t_lookup_start:.6f} sec"
+        )
+
 
         for m in movies:
             node = dht.route_to_node((m["title"], m["id"]))
             print(f"- {m['title']} ({m.get('release_date', 'N/A')}) → Node {node.id_str}")
 
+'''In our implementation, lookup is simulated as a full scan over all active nodes. 
+Therefore, the hop count corresponds to the total number of nodes in the system and remains 
+constant for all queries.'''
+
+'''In our Pastry implementation, lookup is simulated as a full scan across all nodes, 
+resulting in a constant hop count equal to the number of nodes. In contrast, 
+Chord performs logarithmic routing using finger tables, leading to variable hop counts with 
+an average of O(log N).'''
