@@ -59,12 +59,16 @@ class DHT:
         self._link_ring()
         self._rebuild_finger_tables()
 
-    def put(self, key: str, value: Any) -> Node:
+    def put(self, key: str, value: Any, r: int) -> Node:
         h = self._hash_key(key)
         owner, _ = self.find_successor(h)
         if key not in owner.data:
             owner.data[key] = []
-        owner.data[key].append(value)
+            owner.data[key].append(value)
+            for x in range(r):
+                owner = owner.successor
+                owner.data[key] = []
+                owner.data[key].append(value)
         return owner
 
     def get(self, key: str) -> List[Any]:

@@ -6,8 +6,10 @@ import pickle
 import csv
 import os
 
+
 CSV_PATH = r"C:/Users/tasis/Desktop/sxoli/DISTRIBUTED_SYSTEMS/output.csv"
 PICKLE_PATH = r"C:/Users/tasis/Desktop/sxoli/DISTRIBUTED_SYSTEMS/my_dht.pkl"
+replication_factor = 3
 
 def make_chunks(n_rows: int, batch_size: int):
     chunks = []
@@ -48,7 +50,7 @@ if __name__ == "__main__":
             for fut in futures:
                 pairs = fut.result()
                 for title, attrs in pairs:
-                    d.put(title, attrs)
+                    d.put(title, attrs, replication_factor)
 
         with open(PICKLE_PATH, "wb") as f:
             pickle.dump(d, f)
@@ -106,7 +108,10 @@ if __name__ == "__main__":
             writer.writerows(results)
 
     #find_3_random_movies()
-    
-    #lookup()
+    d.leave(next((n for n in d.nodes if n.id == 4202682092066141005), None))
+    d.leave(next((n for n in d.nodes if n.id == 4267002275469613794), None))
+    d.leave(next((n for n in d.nodes if n.id == 4273747497955256328), None))
+    d.leave(next((n for n in d.nodes if n.id == 4274303272221712628), None))
+    lookup()
 
     #Melodies of War
