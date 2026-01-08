@@ -3,11 +3,11 @@ import pandas as pd
 import time
 from DHT import DHT 
 import pickle
-from pprint import pprint
-
+import csv
+import os
 
 CSV_PATH = r"C:/Users/tasis/Desktop/sxoli/DISTRIBUTED_SYSTEMS/output.csv"
-
+PICKLE_PATH = r"C:/Users/tasis/Desktop/sxoli/DISTRIBUTED_SYSTEMS/my_dht.pkl"
 
 def make_chunks(n_rows: int, batch_size: int):
     chunks = []
@@ -16,73 +16,97 @@ def make_chunks(n_rows: int, batch_size: int):
         chunks.append((start, end))
     return chunks
 
-
 def process_chunk(start: int, end: int):
-    df = pd.read_csv(CSV_PATH)
-
-    df_chunk = df.iloc[start:end]
-
+    df = pd.read_csv(CSV_PATH, skiprows=range(1, start + 1), nrows=end - start)
     out = []
-    for _, row in df_chunk.iterrows():
-        title = row["title"]
-        attrs = row.to_dict()
-        out.append((title, attrs))
+    for _, row in df.iterrows():
+        out.append((row["title"], row.to_dict()))
     return out
 
-
 if __name__ == "__main__":
-
-    try:
-        with open("C:/Users/tasis/Desktop/sxoli/DISTRIBUTED_SYSTEMS/my_dht.pkl", "rb") as f:
+    d = None
+    if os.path.exists(PICKLE_PATH):
+        print("Loading existing DHT from pickle...")
+        with open(PICKLE_PATH, "rb") as f:
             d = pickle.load(f)
-    except Exception as e:
-        df = pd.read_csv(CSV_PATH)
-        n_rows = len(df)
-        print("No .pkl file found")
-        batch_size = 100000
+    else:
+        print("No .pkl file found. Building new DHT...")
+        df_info = pd.read_csv(CSV_PATH, usecols=["title"])
+        n_rows = len(df_info)
+        batch_size = 50000 
 
         chunks = make_chunks(n_rows, batch_size)
-        print(f"Total rows: {n_rows}, batch_size: {batch_size}, chunks: {len(chunks)}")
-
         d = DHT(m_bits=64)
-        for i in range(100):
-            d.join("node" + str(i))
-
-        start = time.perf_counter()
-
         
-        max_workers = min(len(chunks), 12)
-        with ProcessPoolExecutor(max_workers=max_workers) as ex:
-            futures = [ex.submit(process_chunk, s, e) for (s, e) in chunks]
+        for i in range(300):
+            d.join(f"node{i}")
 
+        start_time = time.perf_counter()
+        
+        with ProcessPoolExecutor(max_workers=os.cpu_count()) as ex:
+            futures = [ex.submit(process_chunk, s, e) for (s, e) in chunks]
             for fut in futures:
                 pairs = fut.result()
                 for title, attrs in pairs:
                     d.put(title, attrs)
 
-        with open("C:/Users/tasis/Desktop/sxoli/DISTRIBUTED_SYSTEMS/my_dht.pkl", "wb") as f:
+        with open(PICKLE_PATH, "wb") as f:
             pickle.dump(d, f)
-
-        end = time.perf_counter()
-        print("Execution time:", end - start, "seconds")
-        print(f"Loaded {n_rows} rows with batch_size={batch_size} and {len(chunks)} chunks.")
+            
+        print(f"Build completed in {time.perf_counter() - start_time:.2f} seconds.")
 
 
-#Node 18174345339414816917: 2204 items
-#Node 18408725440168399977: 10041 items
+    def lookup():
+        while True:
+            title = input("\nΔώστε όνομα ταινίας (ή !@ για έξοδο): ")
+            if title == "!@":
+                break
 
+            start = time.perf_counter()
+            results = d.get(title)
+            end = time.perf_counter()
 
-    start = time.perf_counter()
-
-    d.put("The Life of Charles Peace", 23)
-    d.put("The Life of Charles Peace", 24)
-    d.put("The Life of Charles Peace", 25)
-    for k, owner, val, hops in d.get("The Life of Charles Peace"):
-        print(k, val, owner, hops)
-
-
-    end = time.perf_counter()
-    print("Execution time:", end - start, "seconds")
+            if not results or not results[0][2]:
+                print("No Movies found.")
+            else:
+                key, owner, movie_list, hops = results[0]
+                print(f"\nFound {len(movie_list)} results in {owner} ({hops} hops):")
+                print("-" * 50)
+                
+                for i, movie in enumerate(movie_list, 1):
+                    print(f"RESULTS {i}:")
+                    for field, value in movie.items():
+                        print(f"  {field}: {value}")
+                    print("-" * 30)
+            
+            print(f"Lookup Time: {end - start:.6f} sec")
     
+    def find_3_random_movies():
+        results = []
+        for node in d.nodes:
+            count = 0
+            for title, movie_info in node.data.items():
+                if isinstance(movie_info, list):
+                    for movie in movie_info:
+                        if count < 3:
+                            results.append([movie.get('title')]) 
+                            count += 1
+                        else: break
+                else:
+                    if count < 3:
+                        results.append([movie_info.get('title')])
+                        count += 1
+                
+                if count >= 3:
+                    break
 
+        print(results)
+        with open('C:/Users/tasis/Desktop/sxoli/DISTRIBUTED_SYSTEMS/random_movie_names.csv', 'w', newline='', encoding='utf-8') as csvfile:
+            writer = csv.writer(csvfile)
+            writer.writerows(results)
 
+    #find_3_random_movies()
+    
+    #lookup()
+
+    #Melodies of War

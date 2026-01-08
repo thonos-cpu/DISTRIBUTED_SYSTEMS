@@ -44,20 +44,6 @@ class DHT:
         self._link_ring()
         self._rebuild_finger_tables()
         return new_node
-    
-    def leave(self, node: Node):
-        
-        if node is None:
-            raise ValueError(f"Node is not part of this DHT")
-
-        if len(self.nodes) == 1:
-            node.data.clear()
-            self.nodes.clear()
-            return
-
-        self.nodes.remove(node)
-        self._link_ring()
-        self._rebuild_finger_tables()
 
     def put(self, key: str, value: Any) -> Node:
         h = self._hash_key(key)
