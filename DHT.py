@@ -46,7 +46,6 @@ class DHT:
         return new_node
     
     def leave(self, node: Node):
-        
         if node is None:
             raise ValueError(f"Node is not part of this DHT")
 
@@ -64,15 +63,23 @@ class DHT:
         owner, _ = self.find_successor(h)
         if key not in owner.data:
             owner.data[key] = []
-            owner.data[key].append(value)
-            for x in range(r):
-                owner = owner.successor
-                owner.data[key] = []
-                owner.data[key].append(value)
+        owner.data[key].append(value)
+        half_ring = 1 << (self.m_bits - 1)
+        opposite_id = (owner.id + half_ring) & self.mask
+        current, _ = self.find_successor(opposite_id)
+        for _ in range(r):
+            current.data[key] = list(owner.data[key])
+            current = current.successor
         return owner
 
     def get(self, key: str) -> List[Any]:
         h = self._hash_key(key)
         owner, hops = self.find_successor(h)
         results = owner.data.get(key, [])
+        if len(results) == 0:
+            half_ring = 1 << (self.m_bits - 1)
+            opposite_id = (h + half_ring) & self.mask
+            owner, extra_hops = self.find_successor(opposite_id)
+            hops += extra_hops
+            results = owner.data.get(key, [])
         return [(key, owner, results, hops)]

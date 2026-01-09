@@ -22,7 +22,12 @@ def process_chunk(start: int, end: int):
     df = pd.read_csv(CSV_PATH, skiprows=range(1, start + 1), nrows=end - start)
     out = []
     for _, row in df.iterrows():
-        out.append((row["title"], row.to_dict()))
+        filtered_data = {
+            "id": row.get("id"),
+            "release_date": row.get("release_date"),
+            "title": row.get("title")
+        }
+        out.append((row["title"], filtered_data))
     return out
 
 if __name__ == "__main__":
@@ -107,11 +112,31 @@ if __name__ == "__main__":
             writer = csv.writer(csvfile)
             writer.writerows(results)
 
-    #find_3_random_movies()
-    d.leave(next((n for n in d.nodes if n.id == 4202682092066141005), None))
-    d.leave(next((n for n in d.nodes if n.id == 4267002275469613794), None))
-    d.leave(next((n for n in d.nodes if n.id == 4273747497955256328), None))
-    d.leave(next((n for n in d.nodes if n.id == 4274303272221712628), None))
-    lookup()
+    def node_keys_len():
+        results = []
+        for node in d.nodes:
+            results.append([len(node.data)])
+        with open('C:/Users/tasis/Desktop/sxoli/DISTRIBUTED_SYSTEMS/movies_len_in_each_node_with_r_3.csv', 'w', newline='', encoding='utf-8') as csvfile:
+            writer = csv.writer(csvfile)
+            writer.writerows(results)
 
-    #Melodies of War
+
+    def save_nodes():
+        results = []
+        for node in d.nodes:
+            results.append([node.id])
+        with open('C:/Users/tasis/Desktop/sxoli/DISTRIBUTED_SYSTEMS/nodes.csv', 'w', newline='', encoding='utf-8') as csvfile:
+            writer = csv.writer(csvfile)
+            writer.writerows(results)
+
+    #save_nodes()
+    #node_keys_len()
+    #find_3_random_movies() # function to save first 3 movies of each node in a csv file.
+
+    d.leave(next((n for n in d.nodes if n.id == 4202682092066141005), None))
+    d.leave(next((n for n in d.nodes if n.id == 13443093695648291354), None))
+    d.leave(next((n for n in d.nodes if n.id == 13463368274894646953), None))
+    #d.leave(next((n for n in d.nodes if n.id == 13471430620621363024), None))
+
+
+    lookup()
