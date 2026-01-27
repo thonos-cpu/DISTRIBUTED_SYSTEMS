@@ -1,8 +1,8 @@
 """
-NOTE:
-Pastry routing is simulated at overlay level.
-Hop count is estimated based on Pastry theoretical complexity O(log_B N).
+Pastry DHT implementation with prefix-based routing,
+leaf sets and decentralized lookup.
 """
+
 
 
 from typing import Optional, Any, List
@@ -10,6 +10,7 @@ from concurrent.futures import ThreadPoolExecutor
 
 from .node import Node
 from ..common.hash_utils import hash_to_int
+from .utils import normalize_title
 import math
 
 class PastryDHT:
@@ -23,20 +24,57 @@ class PastryDHT:
     # -----------------------------
     def join(self, node_name: str) -> Node:
         node_id = hash_to_int(node_name, self.m_bits)
-        node = Node(node_id, self.b)
-        self.nodes.append(node)
-        return node
+        new_node = Node(node_id, self.b)
+
+        if not self.nodes:
+            self.nodes.append(new_node)
+            return new_node
+
+        # Pastry join routing
+        current = self.nodes[0]
+
+        max_steps = int(math.log2(len(self.nodes) + 1)) + 5
+        steps = 0
+
+        while True:
+            steps += 1
+            next_node = current.route(new_node.id)
+
+            current.update_routing_table(new_node)
+            new_node.update_routing_table(current)
+
+            if next_node.id == current.id or steps >= max_steps:
+                break
+
+            current = next_node
+
+        # Leaf set
+        self.nodes.append(new_node)
+
+        for n in self.nodes:
+            if n.id != new_node.id:
+                new_node.update_leaf_set(n)
+                n.update_leaf_set(new_node)
+        return new_node
+
 
     def leave(self, node_id: int) -> None:
-        """
-        Simulated node leave.
-        Data migration is omitted for performance reasons.
-        """
         node = next((n for n in self.nodes if n.id == node_id), None)
         if not node:
             return
 
         self.nodes.remove(node)
+
+        for n in self.nodes:
+            # leaf set cleanup
+            n.leaf_set = [x for x in n.leaf_set if x.id != node_id]
+
+            # routing table cleanup
+            for i in range(len(n.routing_table)):
+                for j in range(len(n.routing_table[i])):
+                    if n.routing_table[i][j] and n.routing_table[i][j].id == node_id:
+                        n.routing_table[i][j] = None
+
 
 
 
@@ -47,48 +85,53 @@ class PastryDHT:
         """
         Insert movie using UNIQUE key (title, movie_id)
         """
-        key = (title, movie_id)
-        node = self.route_to_node(key)
-        node.data[title].append(value)
+        
+        norm_title = normalize_title(title)
+        if norm_title is None:
+            return
+
+
+        node, _ = self.locate_node(norm_title)
+        node.data[norm_title].append(value)
         return node
     
     def update(self, title: str, movie_id: int, new_attrs: dict) -> bool:
-        """
-        Update a specific movie (by title + id).
-        """
-        key = (title, movie_id)
-        node = self.route_to_node(key)
-
-        if title not in node.data:
+        norm_title = normalize_title(title)
+        if norm_title is None:
             return False
 
-        for i, movie in enumerate(node.data[title]):
+        node, _ = self.locate_node(norm_title)
+
+        if norm_title not in node.data:
+            return False
+
+        for i, movie in enumerate(node.data[norm_title]):
             if movie.get("id") == movie_id:
-                node.data[title][i] = new_attrs
+                node.data[norm_title][i] = new_attrs
                 return True
 
         return False
 
 
-    def delete(self, title: str, movie_id: int) -> bool:
-        """
-        Delete a specific movie (by title + id) from the DHT.
-        """
-        key = (title, movie_id)
-        node = self.route_to_node(key)
 
-        if title not in node.data:
+    def delete(self, title: str, movie_id: int) -> bool:
+        norm_title = normalize_title(title)
+        if norm_title is None:
             return False
 
-        movies = node.data[title]
+        node, _ = self.locate_node(norm_title)
+
+        if norm_title not in node.data:
+            return False
+
+        movies = node.data[norm_title]
 
         for i, movie in enumerate(movies):
             if movie.get("id") == movie_id:
                 del movies[i]
 
-                # αν δεν έμειναν άλλες ταινίες με αυτό το title
                 if not movies:
-                    del node.data[title]
+                    del node.data[norm_title]
 
                 return True
 
@@ -96,56 +139,64 @@ class PastryDHT:
 
 
 
+
     
-
     def get(self, title: str):
+        if not self.nodes:
+            return [], 0, None
+
+        norm_title = normalize_title(title)
+        if norm_title is None:
+            return [], 0, None
+
+        node, hops = self.locate_node(norm_title)
+        # Επιστρέφουμε: (λίστα ταινιών, αριθμός hops, το ID του κόμβου)
+        return node.data.get(norm_title, []), hops, node.id_str
+
+
+
+
+
+    def get_parallel(self, title: str, k: int = 4):
+        norm_title = normalize_title(title)
+        if norm_title is None:
+            return [], 0
+
         results = []
+        hop_counts = []
 
-        # Pastry theoretical hops ≈ O(log_B N)
-        if len(self.nodes) > 1:
-            hops = math.ceil(math.log(len(self.nodes), 2 ** self.b))
-        else:
-            hops = 1
+        def lookup():
+            node, hops = self.locate_node(norm_title)
+            return node, hops
 
-        for node in self.nodes:
-            if title in node.data:
-                results.extend(node.data[title])
+        with ThreadPoolExecutor(max_workers=k) as executor:
+            futures = [executor.submit(lookup) for _ in range(k)]
 
-        return results, hops
-
-
-
-    def get_parallel(self, title: str):
-        results = []
-
-        if len(self.nodes) > 1:
-            hops = math.ceil(math.log(len(self.nodes), 2 ** self.b))
-        else:
-            hops = 1
-
-        def search_node(node):
-            if title in node.data:
-                return node.data[title]
-            return []
-
-        with ThreadPoolExecutor() as executor:
-            futures = [executor.submit(search_node, node) for node in self.nodes]
             for f in futures:
-                results.extend(f.result())
+                node, hops = f.result()
+                if norm_title in node.data:
+                    results.extend(node.data[norm_title])
+                    hop_counts.append(hops)
 
-        return results, hops
+        return results, min(hop_counts) if hop_counts else ([], 0)
 
 
-
-
-
-    # -----------------------------
-    # Routing (simulation-level)
-    # -----------------------------
-    def route_to_node(self, key) -> Node:
-        """
-        Routes based on hashed key.
-        Returns destination node.
-        """
+    def locate_node(self, key):
         key_id = hash_to_int(key, self.m_bits)
-        return min(self.nodes, key=lambda n: abs(n.id - key_id))
+        current = self.nodes[0]
+        hops = 0
+        max_hops = int(math.log2(len(self.nodes))) + 2
+
+        while hops < max_hops:
+            hops += 1
+            next_node = current.route(key_id)
+            if next_node.id == current.id:
+                return current, hops
+            current = next_node
+
+        return current, hops
+
+
+
+
+

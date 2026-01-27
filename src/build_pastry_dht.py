@@ -4,6 +4,7 @@ import random
 import string
 from concurrent.futures import ProcessPoolExecutor, as_completed
 from multiprocessing import cpu_count, freeze_support
+from .pastry.utils import normalize_title
 from tqdm import tqdm
 
 
@@ -52,6 +53,14 @@ if __name__ == "__main__":
     print("------Loading dataset size------")
     n_rows = len(pd.read_csv(CSV_PATH))
     print(f"Total rows: {n_rows}")
+
+
+    def insert_movies(dht: PastryDHT, movies):
+        for i, (title, movie_id, attrs) in enumerate(movies):
+            if i % 100000 == 0:
+                print(f"Inserted {i} movies...")
+            dht.put(title, movie_id, attrs)
+
 
     # --- Create DHT nodes ---
     t_nodes_start = time.perf_counter()
@@ -119,7 +128,7 @@ if __name__ == "__main__":
 
     for title in lookup_titles:
         start = time.perf_counter()
-        _, hops = dht.get(title)
+        _, hops, _ = dht.get(normalize_title(title)) 
         end = time.perf_counter()
         lookup_times.append(end - start)
         hop_counts.append(hops)
@@ -191,7 +200,7 @@ if __name__ == "__main__":
 
     print("\n------[UPDATE DEMO]------")
 
-    movies, _ = dht.get(demo_title)
+    movies, _, _ = dht.get(demo_title)
     target = [m for m in movies if m["id"] == demo_id][0]
 
     print("======Before update:")
@@ -204,7 +213,7 @@ if __name__ == "__main__":
 
     dht.update(demo_title, demo_id, updated_attrs)
 
-    movies_after, _ = dht.get(demo_title)
+    movies_after, _, _ = dht.get(demo_title)
     target_after = [m for m in movies_after if m["id"] == demo_id][0]
 
     print("======After update:")
@@ -248,14 +257,14 @@ if __name__ == "__main__":
 
     print("\n------[DELETE DEMO]------")
 
-    movies_before, _ = dht.get(demo_title)
+    movies_before, _, _ = dht.get(demo_title)
     print(f"------Before delete ({len(movies_before)} movies):")
     for m in movies_before:
         print(f"  - {m['title']} ({m['id']})")
 
     dht.delete(demo_title, demo_id)
 
-    movies_after, _ = dht.get(demo_title)
+    movies_after, _, _ = dht.get(demo_title)
     print(f"\n------After delete ({len(movies_after)} movies):")
     for m in movies_after:
         print(f"  - {m['title']} ({m['id']})")
@@ -371,29 +380,19 @@ if __name__ == "__main__":
             break
 
         t_lookup_start = time.perf_counter()
-        movies, hops = dht.get(title)
+        # Στέλνουμε το title ΩΣ ΕΧΕΙ, η dht.get θα το κάνει normalize
+        movies, hops, node_id = dht.get(title) 
         t_lookup_end = time.perf_counter()
 
         if not movies:
-            print("Δεν βρέθηκε ταινία")
+            print(f"Δεν βρέθηκε ταινία (Normalized search for: '{normalize_title(title)}')")
             continue
 
-        print(
-        f"Βρέθηκαν {len(movies)} ταινίες | "
-        f"hops: {hops} | "
-        f"lookup time: {t_lookup_end - t_lookup_start:.6f} sec"
-        )
-
-
+        print(f"Βρέθηκαν {len(movies)} ταινίες | hops: {hops} | time: {t_lookup_end - t_lookup_start:.6f}s")
         for m in movies:
-            node = dht.route_to_node((m["title"], m["id"]))
-            print(f"- {m['title']} ({m.get('release_date', 'N/A')}) → Node {node.id_str}")
+            print(f"- {m['title']} ({m.get('release_date', 'N/A')}) --> Node {node_id}")
 
 '''In our implementation, lookup is simulated as a full scan over all active nodes. 
 Therefore, the hop count corresponds to the total number of nodes in the system and remains 
 constant for all queries.'''
 
-'''In our Pastry implementation, lookup is simulated as a full scan across all nodes, 
-resulting in a constant hop count equal to the number of nodes. In contrast, 
-Chord performs logarithmic routing using finger tables, leading to variable hop counts with 
-an average of O(log N).'''
