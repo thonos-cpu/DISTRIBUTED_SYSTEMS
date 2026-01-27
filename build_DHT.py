@@ -1,10 +1,11 @@
 from concurrent.futures import ProcessPoolExecutor
 import pandas as pd
 import time
-from DHT import DHT 
+from DHT import DHT
 import pickle
 import csv
 import os
+import random
 
 
 CSV_PATH = r"C:/Users/tasis/Desktop/sxoli/DISTRIBUTED_SYSTEMS/output.csv"
@@ -40,7 +41,7 @@ if __name__ == "__main__":
         print("No .pkl file found. Building new DHT...")
         df_info = pd.read_csv(CSV_PATH, usecols=["title"])
         n_rows = len(df_info)
-        batch_size = 50000 
+        batch_size = 50000
 
         chunks = make_chunks(n_rows, batch_size)
         d = DHT(m_bits=64)
@@ -86,31 +87,38 @@ if __name__ == "__main__":
                         print(f"  {field}: {value}")
                     print("-" * 30)
             
-            print(f"Lookup Time: {end - start:.6f} sec")
+            print(f"Lookup Time: {1000*(end - start):.6f} ms")
     
-    def find_3_random_movies():
+    def find_random_movies(max: int):
         results = []
-        for node in d.nodes:
-            count = 0
-            for title, movie_info in node.data.items():
-                if isinstance(movie_info, list):
-                    for movie in movie_info:
-                        if count < 3:
-                            results.append([movie.get('title')]) 
-                            count += 1
-                        else: break
-                else:
-                    if count < 3:
-                        results.append([movie_info.get('title')])
-                        count += 1
-                
-                if count >= 3:
-                    break
 
-        print(results)
-        with open('C:/Users/tasis/Desktop/sxoli/DISTRIBUTED_SYSTEMS/random_movie_names.csv', 'w', newline='', encoding='utf-8') as csvfile:
+        for node in d.nodes:
+            pool = []
+
+            for _, movie_info in node.data.items():
+                if isinstance(movie_info, list):
+                    pool.extend(movie_info)
+                else:
+                    pool.append(movie_info)
+
+            if not pool:
+                continue
+
+            k = min(max, len(pool))
+            picked = random.sample(pool, k)
+
+            for movie in picked:
+                results.append([movie.get("title")])
+
+        with open(
+            "C:/Users/tasis/Desktop/sxoli/DISTRIBUTED_SYSTEMS/random_movie_names.csv",
+            "w",
+            newline="",
+            encoding="utf-8"
+        ) as csvfile:
             writer = csv.writer(csvfile)
             writer.writerows(results)
+
 
     def node_keys_len():
         results = []
@@ -129,14 +137,38 @@ if __name__ == "__main__":
             writer = csv.writer(csvfile)
             writer.writerows(results)
 
-    #save_nodes()
-    #node_keys_len()
-    #find_3_random_movies() # function to save first 3 movies of each node in a csv file.
+    def deletion(number: int, step: int):
+        with open('C:/Users/tasis/Desktop/sxoli/DISTRIBUTED_SYSTEMS/nodes.csv', newline='', encoding='utf-8') as f:
+            temp_number = number
+            rows = list(csv.reader(f))
+            while temp_number>0:
+                for i in range(step):
+                    r = random.randrange(len(rows))
+                    d.leave(next((n for n in d.nodes if n.id == int(rows[r][0])), None))
+                    del rows[r]
+                    with open('C:/Users/tasis/Desktop/sxoli/DISTRIBUTED_SYSTEMS/random_movie_names.csv', newline='', encoding='utf-8') as c:
+                        result_count = 0
+                        reader_c = csv.reader(c)
+                        for row in reader_c:
+                            results =  d.get(row[0])
+                            if not results or not results[0][2]:
+                                result_count = result_count + 1
+                temp_number = temp_number - step
+                print("For", number - temp_number, "failed nodes we had ", f"{result_count/300:.2f}", "%", " failed lookups, while normal is:" f"{100*(((number - temp_number)/300) ** replication_factor):.2f}")
 
-    d.leave(next((n for n in d.nodes if n.id == 4202682092066141005), None))
-    d.leave(next((n for n in d.nodes if n.id == 13443093695648291354), None))
-    d.leave(next((n for n in d.nodes if n.id == 13463368274894646953), None))
+
+
+
+    #save_nodes() # save all the node hashes in acsv file for further testing
+    #node_keys_len() # save the no. of movies each node hosts
+    find_random_movies(100) # function to save first 3 movies of each node in a csv file.
+
+    #d.leave(next((n for n in d.nodes if n.id == 3125458981636820055), None))
+    #d.leave(next((n for n in d.nodes if n.id == 13443093695648291354), None))
+    #d.leave(next((n for n in d.nodes if n.id == 13463368274894646953), None))
     #d.leave(next((n for n in d.nodes if n.id == 13471430620621363024), None))
 
 
-    lookup()
+    #lookup()
+
+    deletion(150, 10)

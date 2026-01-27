@@ -1,0 +1,14 @@
+For  20 nodes it took  3659.9000450223684 μs to create the nodes  26517998.199909925 μs for the keys and  8.745666903754076 μs average for a lookup      
+For  40 nodes it took  16304.499935358763 μs to create the nodes  30155999.19995293 μs for the keys and  3.7802222909198866 μs average for a lookup      
+For  60 nodes it took  21379.49992902577 μs to create the nodes  29774251.80003047 μs for the keys and  3.9912222160233393 μs average for a lookup       
+For  80 nodes it took  38515.300024300814 μs to create the nodes  30286292.099859565 μs for the keys and  4.153222156067689 μs average for a lookup
+For  100 nodes it took  61457.70009607077 μs to create the nodes  31523382.29981251 μs for the keys and  4.490999918844965 μs average for a lookup
+For  120 nodes it took  92930.00004254282 μs to create the nodes  36021674.20019396 μs for the keys and  4.616999843468268 μs average for a lookup
+For  140 nodes it took  124063.39985318482 μs to create the nodes  34530286.099994555 μs for the keys and  4.548222188734346 μs average for a lookup     
+For  160 nodes it took  164466.80016815662 μs to create the nodes  33177903.79980579 μs for the keys and  4.783000072671308 μs average for a lookup      
+For  180 nodes it took  215052.0000141114 μs to create the nodes  36833150.60008317 μs for the keys and  4.976777773764399 μs average for a lookup       
+For  200 nodes it took  248356.40005767345 μs to create the nodes  32296336.00008674 μs for the keys and  5.05733329595791 μs average for a lookup       
+For  220 nodes it took  302033.00016000867 μs to create the nodes  33334760.40000096 μs for the keys and  5.582444266312653 μs average for a lookup      
+For  240 nodes it took  405880.1999781281 μs to create the nodes  32873548.100003973 μs for the keys and  5.163111103077729 μs average for a lookup      
+For  260 nodes it took  435838.30003626645 μs to create the nodes  34603040.49984552 μs for the keys and  5.201222116334571 μs average for a lookup      
+For  280 nodes it took  501588.3001033217 μs to create the nodes  38143804.39999513 μs for the keys and  5.512444250699547 μs average for a lookup
