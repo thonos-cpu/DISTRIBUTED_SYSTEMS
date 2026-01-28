@@ -76,8 +76,6 @@ class PastryDHT:
                         n.routing_table[i][j] = None
 
 
-
-
     # -----------------------------
     # DHT operations
     # -----------------------------
@@ -89,7 +87,6 @@ class PastryDHT:
         norm_title = normalize_title(title)
         if norm_title is None:
             return
-
 
         node, _ = self.locate_node(norm_title)
         node.data[norm_title].append(value)
@@ -111,7 +108,6 @@ class PastryDHT:
                 return True
 
         return False
-
 
 
     def delete(self, title: str, movie_id: int) -> bool:
@@ -138,9 +134,6 @@ class PastryDHT:
         return False
 
 
-
-
-    
     def get(self, title: str):
         if not self.nodes:
             return [], 0, None
@@ -152,9 +145,6 @@ class PastryDHT:
         node, hops = self.locate_node(norm_title)
         # Επιστρέφουμε: (λίστα ταινιών, αριθμός hops, το ID του κόμβου)
         return node.data.get(norm_title, []), hops, node.id_str
-
-
-
 
 
     def get_parallel(self, title: str, k: int = 4):
@@ -195,8 +185,3 @@ class PastryDHT:
             current = next_node
 
         return current, hops
-
-
-
-
-
