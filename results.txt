@@ -355,44 +355,12 @@ With 310 nodes and a replication factor of 6: lookup=5.857732680826228 μs, size
 
 
 
--------------------------NODES = 300----------------------30000 Sample Titles-----------------REPLICATION_FACTOR = 1---------------------------------------------------------------
-For 3.33 %  failed nodes and a replication factor of  1 we had avergae hops of: 5.25
-For 6.67 %  failed nodes and a replication factor of  1 we had avergae hops of: 5.40
-For 10.00 %  failed nodes and a replication factor of  1 we had avergae hops of: 5.50
-For 13.33 %  failed nodes and a replication factor of  1 we had avergae hops of: 5.65
-For 16.67 %  failed nodes and a replication factor of  1 we had avergae hops of: 5.76
-For 20.00 %  failed nodes and a replication factor of  1 we had avergae hops of: 5.88
-For 23.33 %  failed nodes and a replication factor of  1 we had avergae hops of: 5.97
-For 26.67 %  failed nodes and a replication factor of  1 we had avergae hops of: 6.08
-For 30.00 %  failed nodes and a replication factor of  1 we had avergae hops of: 6.18
-For 33.33 %  failed nodes and a replication factor of  1 we had avergae hops of: 6.28
-For 36.67 %  failed nodes and a replication factor of  1 we had avergae hops of: 6.39
-For 40.00 %  failed nodes and a replication factor of  1 we had avergae hops of: 6.54
-For 43.33 %  failed nodes and a replication factor of  1 we had avergae hops of: 6.69
-For 46.67 %  failed nodes and a replication factor of  1 we had avergae hops of: 6.72
-For 50.00 %  failed nodes and a replication factor of  1 we had avergae hops of: 6.74
+% Average Lookup Time (29912 titles)
+coordinates { (20, 0.00000831) (40, 0.00000787) (60, 0.00000750) (80, 0.00000832) (100, 0.00000811) (120, 0.00000882) (140, 0.00000961) (160, 0.00000981) (180, 0.00000954) (200, 0.00000956) (220, 0.00000964) (240, 0.00000950) (260, 0.00000930) (280, 0.00000975) (300, 0.00000939) };
+
+% Average Hops (29912 titles)
+coordinates { (20, 2.18) (40, 2.56) (60, 2.67) (80, 2.84) (100, 2.92) (120, 2.90) (140, 2.97) (160, 3.09) (180, 3.11) (200, 3.16) (220, 3.16) (240, 3.18) (260, 3.21) (280, 3.25) (300, 3.24) };
 
 
--------------------------NODES = 300----------------------30000 Sample Titles-----------------REPLICATION_FACTOR = 2---------------------------------------------------------------
-
-
-For 3.33 %  failed nodes and a replication factor of  2 we had avergae hops of: 5.27
-For 6.67 %  failed nodes and a replication factor of  2 we had avergae hops of: 5.41
-For 10.00 %  failed nodes and a replication factor of  2 we had avergae hops of: 5.57
-For 13.33 %  failed nodes and a replication factor of  2 we had avergae hops of: 5.67
-For 16.67 %  failed nodes and a replication factor of  2 we had avergae hops of: 5.73
-For 20.00 %  failed nodes and a replication factor of  2 we had avergae hops of: 5.87
-For 23.33 %  failed nodes and a replication factor of  2 we had avergae hops of: 6.04
-For 26.67 %  failed nodes and a replication factor of  2 we had avergae hops of: 6.26
-For 30.00 %  failed nodes and a replication factor of  2 we had avergae hops of: 6.31
-For 33.33 %  failed nodes and a replication factor of  2 we had avergae hops of: 6.44
-For 36.67 %  failed nodes and a replication factor of  2 we had avergae hops of: 6.56
-For 40.00 %  failed nodes and a replication factor of  2 we had avergae hops of: 6.65
-For 43.33 %  failed nodes and a replication factor of  2 we had avergae hops of: 6.70
-For 46.67 %  failed nodes and a replication factor of  2 we had avergae hops of: 6.80
-For 50.00 %  failed nodes and a replication factor of  2 we had avergae hops of: 6.93
-
-
--------------------------NODES = 300----------------------30000 Sample Titles-----------------REPLICATION_FACTOR = 3---------------------------------------------------------------
 
 
