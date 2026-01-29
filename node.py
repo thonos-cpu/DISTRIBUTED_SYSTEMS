@@ -1,5 +1,6 @@
 from typing import Optional, List, Dict, Any
 
+#function to check if a number is between a space with the option for closed bracets
 def in_range(k: int, a: int, b: int, inclusive_right: bool = True) -> bool:
     if a < b:
         return a < k <= b if inclusive_right else a < k < b
@@ -11,8 +12,8 @@ def in_range(k: int, a: int, b: int, inclusive_right: bool = True) -> bool:
 class Node:
     def __init__(self, node_id: int, m_bits: int):
         self.id: int = node_id
-        self.successor: "Node" = self
-        self.predecessor: Optional["Node"] = None
+        self.successor: "Node" = self  #node's successor
+        self.predecessor: Optional["Node"] = None #nodes predecessor
         self.fingers: List["Node"] = [self] * m_bits
         self.data: Dict[str, List[Any]] = {}
 
