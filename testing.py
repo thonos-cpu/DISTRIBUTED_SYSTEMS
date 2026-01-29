@@ -55,25 +55,39 @@ def insert_keys(d: DHT) -> float:
             for title, attrs in pairs:
                 d.put(title, attrs, replication_factor)
     end_time = time.perf_counter()
-    return 1000000*(end_time - start_time)
+
+    with open("C:/Users/tasis/Desktop/sxoli/DISTRIBUTED_SYSTEMS/my_dht.pkl", "wb") as f:
+            pickle.dump(d, f)
+
+    size_bytes = os.path.getsize("C:/Users/tasis/Desktop/sxoli/DISTRIBUTED_SYSTEMS/my_dht.pkl")
+    size_kb = size_bytes / 1024
+    size_mb = size_kb / 1024
+
+    os.remove("C:/Users/tasis/Desktop/sxoli/DISTRIBUTED_SYSTEMS/my_dht.pkl")
+
+    return size_mb
 
 def lookups(d : DHT) -> float:
     hops = 0
+    start_time = time.perf_counter()
     with open(LOOKUP_PATH, newline='', encoding='utf-8') as f:
         reader = csv.reader(f)
         for row in reader:
             key, owner, movie_list, hop = d.get(row[0])[0]
             hops = hops + hop
-    return hops / 900
+    end_time = time.perf_counter()
+    return hops / 29912
 
 def run_simulation(x):
     d = DHT(m_bits=64)
     node_time = make_nodes(d, x)
     insert_time = insert_keys(d)
     lookup_time = lookups(d)
-    return f"For {x} nodes: make_nodes={node_time}μs, insert={insert_time}μs, lookup={lookup_time} hops"
+    print( f"With {x} nodes and a replication factor of {replication_factor}: avg hops = {lookup_time}")
+    del d
         
 if __name__ == "__main__":
-    for x in range(20, 300, 20):
-        d = DHT(m_bits=64)
-        print("For ", x, "nodes it took ", make_nodes(d, x),"μs to create the nodes ", insert_keys(d), "μs for the keys and " , lookups(d), "average hops for a lookup")
+    
+    for i in range(1, 7):
+        replication_factor = i
+        run_simulation(300)

@@ -148,20 +148,20 @@ if __name__ == "__main__":
                     del rows[r]
                     with open('C:/Users/tasis/Desktop/sxoli/DISTRIBUTED_SYSTEMS/random_movie_names.csv', newline='', encoding='utf-8') as c:
                         result_count = 0
+                        hops = 0
                         reader_c = csv.reader(c)
                         for row in reader_c:
-                            results =  d.get(row[0])
-                            if not results or not results[0][2]:
-                                result_count = result_count + 1
+                            key, owner, movie_list, hop = d.get(row[0])[0]
+                            hops = hops + hop
                 temp_number = temp_number - step
-                print("For", number - temp_number, "failed nodes we had ", f"{result_count/300:.2f}", "%", " failed lookups, while normal is:" f"{100*(((number - temp_number)/300) ** replication_factor):.2f}")
+                print("For", f"{(number - temp_number)/3:.2f}", "%",  " failed nodes and a replication factor of ", replication_factor, "we had avergae hops of:", f"{hops/29912:.2f}")
 
 
 
 
     #save_nodes() # save all the node hashes in acsv file for further testing
     #node_keys_len() # save the no. of movies each node hosts
-    find_random_movies(100) # function to save first 3 movies of each node in a csv file.
+    #find_random_movies(100) # function to save first 3 movies of each node in a csv file.
 
     #d.leave(next((n for n in d.nodes if n.id == 3125458981636820055), None))
     #d.leave(next((n for n in d.nodes if n.id == 13443093695648291354), None))
@@ -169,6 +169,8 @@ if __name__ == "__main__":
     #d.leave(next((n for n in d.nodes if n.id == 13471430620621363024), None))
 
 
+
     #lookup()
+
 
     deletion(150, 10)

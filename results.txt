@@ -12,3 +12,387 @@ For  220 nodes it took  302033.00016000867 μs to create the nodes  33334760.400
 For  240 nodes it took  405880.1999781281 μs to create the nodes  32873548.100003973 μs for the keys and  5.163111103077729 μs average for a lookup      
 For  260 nodes it took  435838.30003626645 μs to create the nodes  34603040.49984552 μs for the keys and  5.201222116334571 μs average for a lookup      
 For  280 nodes it took  501588.3001033217 μs to create the nodes  38143804.39999513 μs for the keys and  5.512444250699547 μs average for a lookup
+
+
+
+
+
+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+
+
+
+For  20 nodes it took  3067.899961024523 μs to create the nodes  21796950.09998977 μs for the keys and  2.992945974859588 average hops for a lookup while normal hopes would be:  2.1609640474436813
+For  40 nodes it took  9633.600013330579 μs to create the nodes  27264082.900015637 μs for the keys and  3.52062717304092 average hops for a lookup while normal hopes would be:  2.6609640474436813
+For  60 nodes it took  21823.100047186017 μs to create the nodes  29115106.799872592 μs for the keys and  3.837757421770527 average hops for a lookup while normal hopes would be:  2.9534452978042594
+For  80 nodes it took  39003.39989922941 μs to create the nodes  27353700.200095773 μs for the keys and  4.000601765177855 average hops for a lookup while normal hopes would be:  3.1609640474436813
+For  100 nodes it took  61305.39998412132 μs to create the nodes  28515971.599845216 μs for the keys and  4.150106980476063 average hops for a lookup while normal hopes would be:  3.321928094887362
+For  120 nodes it took  87053.69988456368 μs to create the nodes  28237090.300070122 μs for the keys and  4.226531158063653 average hops for a lookup while normal hopes would be:  3.4534452978042594
+For  140 nodes it took  119900.60005337 μs to create the nodes  29956315.600080416 μs for the keys and  4.372526076491041 average hops for a lookup while normal hopes would be:  3.564641508472483
+For  160 nodes it took  172715.3998799622 μs to create the nodes  32707390.70000127 μs for the keys and  4.452962021930998 average hops for a lookup while normal hopes would be:  3.6609640474436813
+For  180 nodes it took  202202.19995826483 μs to create the nodes  31958190.700039268 μs for the keys and  4.557401711687617 average hops for a lookup while normal hopes would be:  3.7459265481648374
+For  200 nodes it took  262860.30001938343 μs to create the nodes  31941624.300088733 μs for the keys and  4.653383257555496 average hops for a lookup while normal hopes would be:  3.821928094887362
+For  220 nodes it took  297930.0001170486 μs to create the nodes  30245327.200042084 μs for the keys and  4.766749130783632 average hops for a lookup while normal hopes would be:  3.89067985676233
+For  240 nodes it took  354661.10007837415 μs to create the nodes  30889938.100008294 μs for the keys and  4.875100294196309 average hops for a lookup while normal hopes would be:  3.9534452978042594
+For  260 nodes it took  435536.7999523878 μs to create the nodes  31892710.69993265 μs for the keys and  4.91388071676919 average hops for a lookup while normal hopes would be:  4.011183906514227
+For  280 nodes it took  490431.09989725053 μs to create the nodes  29723153.400002047 μs for the keys and  5.0159802086119285 average hops for a lookup while normal hopes would be:  4.064641508472484
+
+
+
+-------------------------NODES = 300----------------------30000 Sample Titles-----------------REPLICATION_FACTOR = 1---------------------------------------------------------------
+
+
+For 3.33 %  failed nodes and a replication factor of  1 we had  0.82 %  failed lookups, while normal is:3.33
+For 6.67 %  failed nodes and a replication factor of  1 we had  2.07 %  failed lookups, while normal is:6.67
+For 10.00 %  failed nodes and a replication factor of  1 we had  2.86 %  failed lookups, while normal is:10.00
+For 13.33 %  failed nodes and a replication factor of  1 we had  3.64 %  failed lookups, while normal is:13.33
+For 16.67 %  failed nodes and a replication factor of  1 we had  7.12 %  failed lookups, while normal is:16.67
+For 20.00 %  failed nodes and a replication factor of  1 we had  9.51 %  failed lookups, while normal is:20.00
+For 23.33 %  failed nodes and a replication factor of  1 we had  12.12 %  failed lookups, while normal is:23.33
+For 26.67 %  failed nodes and a replication factor of  1 we had  13.37 %  failed lookups, while normal is:26.67
+For 30.00 %  failed nodes and a replication factor of  1 we had  17.53 %  failed lookups, while normal is:30.00
+For 33.33 %  failed nodes and a replication factor of  1 we had  19.76 %  failed lookups, while normal is:33.33
+For 36.67 %  failed nodes and a replication factor of  1 we had  22.90 %  failed lookups, while normal is:36.67
+For 40.00 %  failed nodes and a replication factor of  1 we had  25.55 %  failed lookups, while normal is:40.00
+For 43.33 %  failed nodes and a replication factor of  1 we had  28.67 %  failed lookups, while normal is:43.33
+For 46.67 %  failed nodes and a replication factor of  1 we had  33.81 %  failed lookups, while normal is:46.67
+For 50.00 %  failed nodes and a replication factor of  1 we had  36.78 %  failed lookups, while normal is:50.00
+
+
+-------------------------NODES = 300----------------------30000 Sample Titles-----------------REPLICATION_FACTOR = 2---------------------------------------------------------------
+
+
+
+For 3.33 %  failed nodes and a replication factor of  2 we had  0.55 %  failed lookups, while normal is:0.11
+For 6.67 %  failed nodes and a replication factor of  2 we had  2.52 %  failed lookups, while normal is:0.44
+For 10.00 %  failed nodes and a replication factor of  2 we had  3.72 %  failed lookups, while normal is:1.00
+For 13.33 %  failed nodes and a replication factor of  2 we had  4.63 %  failed lookups, while normal is:1.78
+For 16.67 %  failed nodes and a replication factor of  2 we had  5.61 %  failed lookups, while normal is:2.78
+For 20.00 %  failed nodes and a replication factor of  2 we had  8.09 %  failed lookups, while normal is:4.00
+For 23.33 %  failed nodes and a replication factor of  2 we had  9.14 %  failed lookups, while normal is:5.44
+For 26.67 %  failed nodes and a replication factor of  2 we had  10.02 %  failed lookups, while normal is:7.11
+For 30.00 %  failed nodes and a replication factor of  2 we had  12.31 %  failed lookups, while normal is:9.00
+For 33.33 %  failed nodes and a replication factor of  2 we had  14.31 %  failed lookups, while normal is:11.11
+For 36.67 %  failed nodes and a replication factor of  2 we had  15.03 %  failed lookups, while normal is:13.44
+For 40.00 %  failed nodes and a replication factor of  2 we had  16.45 %  failed lookups, while normal is:16.00
+For 43.33 %  failed nodes and a replication factor of  2 we had  18.58 %  failed lookups, while normal is:18.78
+For 46.67 %  failed nodes and a replication factor of  2 we had  19.61 %  failed lookups, while normal is:21.78
+For 50.00 %  failed nodes and a replication factor of  2 we had  22.03 %  failed lookups, while normal is:25.00
+
+
+--------------------------NODES = 300---------------------------------30000 Sample Titles-----------------REPLICATION_FACTOR = 3-----------------------------------------------------------
+
+
+
+For 3.33 %  failed nodes and a replication factor of  3 we had  1.37 %  failed lookups, while normal is:0.00
+For 6.67 %  failed nodes and a replication factor of  3 we had  2.68 %  failed lookups, while normal is:0.03
+For 10.00 %  failed nodes and a replication factor of  3 we had  3.66 %  failed lookups, while normal is:0.10
+For 13.33 %  failed nodes and a replication factor of  3 we had  4.28 %  failed lookups, while normal is:0.24
+For 16.67 %  failed nodes and a replication factor of  3 we had  5.04 %  failed lookups, while normal is:0.46
+For 20.00 %  failed nodes and a replication factor of  3 we had  6.04 %  failed lookups, while normal is:0.80
+For 23.33 %  failed nodes and a replication factor of  3 we had  8.43 %  failed lookups, while normal is:1.27
+For 26.67 %  failed nodes and a replication factor of  3 we had  10.03 %  failed lookups, while normal is:1.90
+For 30.00 %  failed nodes and a replication factor of  3 we had  9.97 %  failed lookups, while normal is:2.70
+For 33.33 %  failed nodes and a replication factor of  3 we had  10.74 %  failed lookups, while normal is:3.70
+For 36.67 %  failed nodes and a replication factor of  3 we had  11.17 %  failed lookups, while normal is:4.93
+For 40.00 %  failed nodes and a replication factor of  3 we had  13.06 %  failed lookups, while normal is:6.40
+For 43.33 %  failed nodes and a replication factor of  3 we had  14.52 %  failed lookups, while normal is:8.14
+For 46.67 %  failed nodes and a replication factor of  3 we had  14.81 %  failed lookups, while normal is:10.16
+For 50.00 %  failed nodes and a replication factor of  3 we had  15.08 %  failed lookups, while normal is:12.50
+
+
+--------------------------NODES = 300---------------------------------30000 Sample Titles-----------------REPLICATION_FACTOR = 4-----------------------------------------------------------
+
+
+For 3.33 %  failed nodes and a replication factor of  4 we had  0.96 %  failed lookups, while normal is:0.00
+For 6.67 %  failed nodes and a replication factor of  4 we had  3.11 %  failed lookups, while normal is:0.00
+For 10.00 %  failed nodes and a replication factor of  4 we had  3.99 %  failed lookups, while normal is:0.01
+For 13.33 %  failed nodes and a replication factor of  4 we had  4.88 %  failed lookups, while normal is:0.03
+For 16.67 %  failed nodes and a replication factor of  4 we had  6.83 %  failed lookups, while normal is:0.08
+For 20.00 %  failed nodes and a replication factor of  4 we had  7.77 %  failed lookups, while normal is:0.16
+For 23.33 %  failed nodes and a replication factor of  4 we had  8.85 %  failed lookups, while normal is:0.30
+For 26.67 %  failed nodes and a replication factor of  4 we had  9.21 %  failed lookups, while normal is:0.51
+For 30.00 %  failed nodes and a replication factor of  4 we had  10.33 %  failed lookups, while normal is:0.81
+For 33.33 %  failed nodes and a replication factor of  4 we had  12.52 %  failed lookups, while normal is:1.23
+For 36.67 %  failed nodes and a replication factor of  4 we had  13.36 %  failed lookups, while normal is:1.81
+For 40.00 %  failed nodes and a replication factor of  4 we had  13.42 %  failed lookups, while normal is:2.56
+For 43.33 %  failed nodes and a replication factor of  4 we had  14.35 %  failed lookups, while normal is:3.53
+For 46.67 %  failed nodes and a replication factor of  4 we had  17.06 %  failed lookups, while normal is:4.74
+For 50.00 %  failed nodes and a replication factor of  4 we had  17.50 %  failed lookups, while normal is:6.25
+
+
+--------------------------NODES = 300---------------------------------30000 Sample Titles-----------------REPLICATION_FACTOR = 5-----------------------------------------------------------
+
+
+For 3.33 %  failed nodes and a replication factor of  5 we had  0.80 %  failed lookups, while normal is:0.00
+For 6.67 %  failed nodes and a replication factor of  5 we had  2.20 %  failed lookups, while normal is:0.00
+For 10.00 %  failed nodes and a replication factor of  5 we had  3.09 %  failed lookups, while normal is:0.00
+For 13.33 %  failed nodes and a replication factor of  5 we had  4.21 %  failed lookups, while normal is:0.00
+For 16.67 %  failed nodes and a replication factor of  5 we had  5.06 %  failed lookups, while normal is:0.01
+For 20.00 %  failed nodes and a replication factor of  5 we had  6.59 %  failed lookups, while normal is:0.03
+For 23.33 %  failed nodes and a replication factor of  5 we had  7.30 %  failed lookups, while normal is:0.07
+For 26.67 %  failed nodes and a replication factor of  5 we had  8.15 %  failed lookups, while normal is:0.13
+For 30.00 %  failed nodes and a replication factor of  5 we had  8.77 %  failed lookups, while normal is:0.24
+For 33.33 %  failed nodes and a replication factor of  5 we had  10.63 %  failed lookups, while normal is:0.41
+For 36.67 %  failed nodes and a replication factor of  5 we had  11.47 %  failed lookups, while normal is:0.66
+For 40.00 %  failed nodes and a replication factor of  5 we had  12.61 %  failed lookups, while normal is:1.02
+For 43.33 %  failed nodes and a replication factor of  5 we had  12.90 %  failed lookups, while normal is:1.53
+For 46.67 %  failed nodes and a replication factor of  5 we had  14.40 %  failed lookups, while normal is:2.21
+For 50.00 %  failed nodes and a replication factor of  5 we had  15.38 %  failed lookups, while normal is:3.12
+
+
+--------------------------NODES = 300---------------------------------30000 Sample Titles-----------------REPLICATION_FACTOR = 6-----------------------------------------------------------
+
+
+
+
+
+For 3.33 %  failed nodes and a replication factor of  6 we had  0.95 %  failed lookups, while normal is:0.00
+For 6.67 %  failed nodes and a replication factor of  6 we had  1.74 %  failed lookups, while normal is:0.00
+For 10.00 %  failed nodes and a replication factor of  6 we had  2.02 %  failed lookups, while normal is:0.00
+For 13.33 %  failed nodes and a replication factor of  6 we had  3.27 %  failed lookups, while normal is:0.00
+For 16.67 %  failed nodes and a replication factor of  6 we had  4.46 %  failed lookups, while normal is:0.00
+For 20.00 %  failed nodes and a replication factor of  6 we had  5.26 %  failed lookups, while normal is:0.01
+For 23.33 %  failed nodes and a replication factor of  6 we had  6.55 %  failed lookups, while normal is:0.02
+For 26.67 %  failed nodes and a replication factor of  6 we had  7.70 %  failed lookups, while normal is:0.04
+For 30.00 %  failed nodes and a replication factor of  6 we had  8.60 %  failed lookups, while normal is:0.07
+For 33.33 %  failed nodes and a replication factor of  6 we had  9.39 %  failed lookups, while normal is:0.14
+For 36.67 %  failed nodes and a replication factor of  6 we had  10.55 %  failed lookups, while normal is:0.24
+For 40.00 %  failed nodes and a replication factor of  6 we had  10.01 %  failed lookups, while normal is:0.41
+For 43.33 %  failed nodes and a replication factor of  6 we had  9.95 %  failed lookups, while normal is:0.66
+For 46.67 %  failed nodes and a replication factor of  6 we had  10.30 %  failed lookups, while normal is:1.03
+For 50.00 %  failed nodes and a replication factor of  6 we had  11.92 %  failed lookups, while normal is:1.56
+
+
+
+
+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+
+
+With 20 nodes and a replication factor of 1: lookup=3.3514275207844575 μs, size=57.65550708770752 Mb.
+With 30 nodes and a replication factor of 1: lookup=3.604275878659801 μs, size=58.086965560913086 Mb.
+With 40 nodes and a replication factor of 1: lookup=3.819029151672992 μs, size=61.101768493652344 Mb.
+With 50 nodes and a replication factor of 1: lookup=4.017852370306654 μs, size=62.53739070892334 Mb.
+With 60 nodes and a replication factor of 1: lookup=4.191515113454482 μs, size=62.82532215118408 Mb.
+With 70 nodes and a replication factor of 1: lookup=4.175120347417845 μs, size=61.53882884979248 Mb.
+With 80 nodes and a replication factor of 1: lookup=4.361931670307176 μs, size=61.540507316589355 Mb.
+With 90 nodes and a replication factor of 1: lookup=4.472128245366802 μs, size=61.54225730895996 Mb.
+With 100 nodes and a replication factor of 1: lookup=4.62923575832585 μs, size=61.543965339660645 Mb.
+With 110 nodes and a replication factor of 1: lookup=4.688148574149383 μs, size=62.691179275512695 Mb.
+With 120 nodes and a replication factor of 1: lookup=4.794691096743214 μs, size=63.26548194885254 Mb.
+With 130 nodes and a replication factor of 1: lookup=5.09954199050938 μs, size=63.26956748962402 Mb.
+With 140 nodes and a replication factor of 1: lookup=4.925020057762823 μs, size=63.27313041687012 Mb.
+With 150 nodes and a replication factor of 1: lookup=4.977728005430897 μs, size=63.27672481536865 Mb.
+With 160 nodes and a replication factor of 1: lookup=4.967347558801503 μs, size=63.28043746948242 Mb.
+With 170 nodes and a replication factor of 1: lookup=5.157976729798325 μs, size=63.28413963317871 Mb.
+With 180 nodes and a replication factor of 1: lookup=5.083464829071332 μs, size=63.28762245178223 Mb.
+With 190 nodes and a replication factor of 1: lookup=5.234023139521372 μs, size=63.29122257232666 Mb.
+With 200 nodes and a replication factor of 1: lookup=5.270774264135688 μs, size=63.29480743408203 Mb.
+With 210 nodes and a replication factor of 1: lookup=5.342808906594204 μs, size=63.298519134521484 Mb.
+With 220 nodes and a replication factor of 1: lookup=5.411644151504544 μs, size=63.3020601272583 Mb.
+With 230 nodes and a replication factor of 1: lookup=5.50451658391644 μs, size=63.30570125579834 Mb.
+With 240 nodes and a replication factor of 1: lookup=5.547964025882137 μs, size=63.30922508239746 Mb.
+With 250 nodes and a replication factor of 1: lookup=5.580907327993034 μs, size=63.3128719329834 Mb.
+With 260 nodes and a replication factor of 1: lookup=5.58407662537743 μs, size=63.31644630432129 Mb.
+With 270 nodes and a replication factor of 1: lookup=5.648157928103103 μs, size=63.32002258300781 Mb.
+With 280 nodes and a replication factor of 1: lookup=5.700698717504513 μs, size=63.3235445022583 Mb.
+With 290 nodes and a replication factor of 1: lookup=5.727547472024022 μs, size=63.32716751098633 Mb.
+With 300 nodes and a replication factor of 1: lookup=5.853664075859104 μs, size=63.33076763153076 Mb.
+With 310 nodes and a replication factor of 1: lookup=5.895363061815126 μs, size=63.334364891052246 Mb.
+With 20 nodes and a replication factor of 2: lookup=3.347275340575929 μs, size=70.90725421905518 Mb.
+With 30 nodes and a replication factor of 2: lookup=3.414733216936662 μs, size=72.63489532470703 Mb.
+With 40 nodes and a replication factor of 2: lookup=3.9023368542291093 μs, size=72.21082401275635 Mb.
+With 50 nodes and a replication factor of 2: lookup=3.9944637646636094 μs, size=71.3507490158081 Mb.
+With 60 nodes and a replication factor of 2: lookup=4.220981546970322 μs, size=71.4955940246582 Mb.
+With 70 nodes and a replication factor of 2: lookup=4.225501467581658 μs, size=72.21560287475586 Mb.
+With 80 nodes and a replication factor of 2: lookup=4.409795398650804 μs, size=72.21730136871338 Mb.
+With 90 nodes and a replication factor of 2: lookup=4.522796869965424 μs, size=72.21908950805664 Mb.
+With 100 nodes and a replication factor of 2: lookup=4.564285240397376 μs, size=72.22082805633545 Mb.
+With 110 nodes and a replication factor of 2: lookup=4.752427119737793 μs, size=73.3680591583252 Mb.
+With 120 nodes and a replication factor of 2: lookup=4.662125569791415 μs, size=73.94237899780273 Mb.
+With 130 nodes and a replication factor of 2: lookup=4.844543989000512 μs, size=73.94646263122559 Mb.
+With 140 nodes and a replication factor of 2: lookup=5.029794065354979 μs, size=73.95002937316895 Mb.
+With 150 nodes and a replication factor of 2: lookup=5.000076890547216 μs, size=73.95361423492432 Mb.
+With 160 nodes and a replication factor of 2: lookup=5.007973392577465 μs, size=73.9573392868042 Mb.
+With 170 nodes and a replication factor of 2: lookup=5.138008155047746 μs, size=73.96104717254639 Mb.
+With 180 nodes and a replication factor of 2: lookup=5.427667830081113 μs, size=73.96452617645264 Mb.
+With 190 nodes and a replication factor of 2: lookup=5.409675046582872 μs, size=73.96812438964844 Mb.
+With 200 nodes and a replication factor of 2: lookup=5.271496387847678 μs, size=73.97171688079834 Mb.
+With 210 nodes and a replication factor of 2: lookup=5.40506150955835 μs, size=73.97542667388916 Mb.
+With 220 nodes and a replication factor of 2: lookup=5.527560847422084 μs, size=73.97896957397461 Mb.
+With 230 nodes and a replication factor of 2: lookup=5.676019657826672 μs, size=73.98261070251465 Mb.
+With 240 nodes and a replication factor of 2: lookup=5.649027143305904 μs, size=73.98613452911377 Mb.
+With 250 nodes and a replication factor of 2: lookup=5.617895829021795 μs, size=73.98976993560791 Mb.
+With 260 nodes and a replication factor of 2: lookup=5.664385528089222 μs, size=73.99334239959717 Mb.
+With 270 nodes and a replication factor of 2: lookup=5.845894621895374 μs, size=73.99692249298096 Mb.
+With 280 nodes and a replication factor of 2: lookup=5.80174177593628 μs, size=74.00044250488281 Mb.
+With 290 nodes and a replication factor of 2: lookup=5.781315191426967 μs, size=74.00406265258789 Mb.
+With 300 nodes and a replication factor of 2: lookup=5.876430868317866 μs, size=74.00766849517822 Mb.
+With 310 nodes and a replication factor of 2: lookup=5.878617275094274 μs, size=74.0112657546997 Mb.
+With 20 nodes and a replication factor of 3: lookup=3.381659535269693 μs, size=79.84893608093262 Mb.
+With 30 nodes and a replication factor of 3: lookup=3.4817832349105875 μs, size=81.5856409072876 Mb.
+With 40 nodes and a replication factor of 3: lookup=4.001577966005869 μs, size=81.58751392364502 Mb.
+With 50 nodes and a replication factor of 3: lookup=4.0848555761820595 μs, size=82.889328956604 Mb.
+With 60 nodes and a replication factor of 3: lookup=4.221071808542393 μs, size=83.74947452545166 Mb.
+With 70 nodes and a replication factor of 3: lookup=4.292989436322317 μs, size=82.89236164093018 Mb.
+With 80 nodes and a replication factor of 3: lookup=4.503991708966975 μs, size=82.89409160614014 Mb.
+With 90 nodes and a replication factor of 3: lookup=4.553543724128132 μs, size=82.89591121673584 Mb.
+With 100 nodes and a replication factor of 3: lookup=4.629436348245847 μs, size=82.89810752868652 Mb.
+With 110 nodes and a replication factor of 3: lookup=4.732451858656547 μs, size=84.18799877166748 Mb.
+With 120 nodes and a replication factor of 3: lookup=4.688563118866857 μs, size=84.61926746368408 Mb.
+With 130 nodes and a replication factor of 3: lookup=4.851073148085228 μs, size=84.62334728240967 Mb.
+With 140 nodes and a replication factor of 3: lookup=4.879071943695535 μs, size=84.62691593170166 Mb.
+With 150 nodes and a replication factor of 3: lookup=5.046392752801166 μs, size=84.6305046081543 Mb.
+With 160 nodes and a replication factor of 3: lookup=4.979509893093905 μs, size=84.63422298431396 Mb.
+With 170 nodes and a replication factor of 3: lookup=5.070379781146943 μs, size=84.63792705535889 Mb.
+With 180 nodes and a replication factor of 3: lookup=5.182341539718691 μs, size=84.64141178131104 Mb.
+With 190 nodes and a replication factor of 3: lookup=5.271613394742417 μs, size=84.64502620697021 Mb.
+With 200 nodes and a replication factor of 3: lookup=5.259340732102089 μs, size=84.64861297607422 Mb.
+With 210 nodes and a replication factor of 3: lookup=5.307946643149707 μs, size=84.65231895446777 Mb.
+With 220 nodes and a replication factor of 3: lookup=5.884618214056331 μs, size=84.65585231781006 Mb.
+With 230 nodes and a replication factor of 3: lookup=5.724705804842289 μs, size=84.65950679779053 Mb.
+With 240 nodes and a replication factor of 3: lookup=5.594674373861561 μs, size=84.66303443908691 Mb.
+With 250 nodes and a replication factor of 3: lookup=5.670055497575209 μs, size=84.66667175292969 Mb.
+With 260 nodes and a replication factor of 3: lookup=5.682512030416941 μs, size=84.67023849487305 Mb.
+With 270 nodes and a replication factor of 3: lookup=5.654834178678629 μs, size=84.6738166809082 Mb.
+With 280 nodes and a replication factor of 3: lookup=5.795439952094228 μs, size=84.67733669281006 Mb.
+With 290 nodes and a replication factor of 3: lookup=5.816321207088869 μs, size=84.6809549331665 Mb.
+With 300 nodes and a replication factor of 3: lookup=5.8534802056577 μs, size=84.68455505371094 Mb.
+With 310 nodes and a replication factor of 3: lookup=5.897185083029841 μs, size=84.68814849853516 Mb.
+With 20 nodes and a replication factor of 4: lookup=3.4623529058867404 μs, size=91.86774253845215 Mb.
+With 30 nodes and a replication factor of 4: lookup=3.5582542149551806 μs, size=92.26239204406738 Mb.
+With 40 nodes and a replication factor of 4: lookup=3.9323214822635353 μs, size=92.26419448852539 Mb.
+With 50 nodes and a replication factor of 4: lookup=4.098174645679779 μs, size=93.56603813171387 Mb.
+With 60 nodes and a replication factor of 4: lookup=4.2844844859852635 μs, size=94.42622184753418 Mb.
+With 70 nodes and a replication factor of 4: lookup=4.323485556976956 μs, size=93.5691385269165 Mb.
+With 80 nodes and a replication factor of 4: lookup=4.417561513341129 μs, size=93.5709810256958 Mb.
+With 90 nodes and a replication factor of 4: lookup=4.626210213158859 μs, size=93.57275485992432 Mb.
+With 100 nodes and a replication factor of 4: lookup=4.640284838021901 μs, size=93.57495784759521 Mb.
+With 110 nodes and a replication factor of 4: lookup=4.735133053902283 μs, size=94.86486721038818 Mb.
+With 120 nodes and a replication factor of 4: lookup=4.670834449321872 μs, size=95.29615592956543 Mb.
+With 130 nodes and a replication factor of 4: lookup=4.80678991478621 μs, size=95.30023193359375 Mb.
+With 140 nodes and a replication factor of 4: lookup=4.972044663283576 μs, size=95.30380058288574 Mb.
+With 150 nodes and a replication factor of 4: lookup=5.776180128394306 μs, size=95.30739688873291 Mb.
+With 160 nodes and a replication factor of 4: lookup=5.04134461206717 μs, size=95.31111335754395 Mb.
+With 170 nodes and a replication factor of 4: lookup=5.101952393255046 μs, size=95.31482315063477 Mb.
+With 180 nodes and a replication factor of 4: lookup=5.1471449597408645 μs, size=95.31830406188965 Mb.
+With 190 nodes and a replication factor of 4: lookup=5.333177321215612 μs, size=95.32190990447998 Mb.
+With 200 nodes and a replication factor of 4: lookup=5.316625438084092 μs, size=95.32549095153809 Mb.
+With 210 nodes and a replication factor of 4: lookup=5.352982076972935 μs, size=95.32920265197754 Mb.
+With 220 nodes and a replication factor of 4: lookup=5.4330837112179164 μs, size=95.33274555206299 Mb.
+With 230 nodes and a replication factor of 4: lookup=5.600180532138144 μs, size=95.33639907836914 Mb.
+With 240 nodes and a replication factor of 4: lookup=5.652707941094366 μs, size=95.33992099761963 Mb.
+With 250 nodes and a replication factor of 4: lookup=5.638181992803256 μs, size=95.34355449676514 Mb.
+With 260 nodes and a replication factor of 4: lookup=5.7062817569079805 μs, size=95.3471097946167 Mb.
+With 270 nodes and a replication factor of 4: lookup=5.699214359880386 μs, size=95.35068988800049 Mb.
+With 280 nodes and a replication factor of 4: lookup=5.822743377099065 μs, size=95.35420608520508 Mb.
+With 290 nodes and a replication factor of 4: lookup=5.83481880466051 μs, size=95.35783767700195 Mb.
+With 300 nodes and a replication factor of 4: lookup=5.896593338873922 μs, size=95.36144351959229 Mb.
+With 310 nodes and a replication factor of 4: lookup=5.863161942408218 μs, size=95.36504650115967 Mb.
+With 20 nodes and a replication factor of 5: lookup=3.8755248706363385 μs, size=102.54595279693604 Mb.
+With 30 nodes and a replication factor of 5: lookup=3.4893420733502483 μs, size=102.9390697479248 Mb.
+With 40 nodes and a replication factor of 5: lookup=3.934551354081204 μs, size=102.94090175628662 Mb.
+With 50 nodes and a replication factor of 5: lookup=4.579884325300836 μs, size=102.94273281097412 Mb.
+With 60 nodes and a replication factor of 5: lookup=4.283264242314394 μs, size=104.6703634262085 Mb.
+With 70 nodes and a replication factor of 5: lookup=4.4038379247300075 μs, size=104.24589920043945 Mb.
+With 80 nodes and a replication factor of 5: lookup=4.486727735511391 μs, size=104.24777507781982 Mb.
+With 90 nodes and a replication factor of 5: lookup=4.589733220318018 μs, size=104.24960994720459 Mb.
+With 100 nodes and a replication factor of 5: lookup=4.645296207829158 μs, size=104.25182628631592 Mb.
+With 110 nodes and a replication factor of 5: lookup=5.494129443172526 μs, size=105.54175090789795 Mb.
+With 120 nodes and a replication factor of 5: lookup=4.818955603919726 μs, size=105.97305965423584 Mb.
+With 130 nodes and a replication factor of 5: lookup=4.815565657623333 μs, size=105.9771375656128 Mb.
+With 140 nodes and a replication factor of 5: lookup=5.078430060998669 μs, size=105.98070621490479 Mb.
+With 150 nodes and a replication factor of 5: lookup=5.06344611073268 μs, size=105.98429489135742 Mb.
+With 160 nodes and a replication factor of 5: lookup=5.151250335634727 μs, size=105.98801136016846 Mb.
+With 170 nodes and a replication factor of 5: lookup=5.6440391795479075 μs, size=105.99171543121338 Mb.
+With 180 nodes and a replication factor of 5: lookup=5.208050278751476 μs, size=105.99520587921143 Mb.
+With 190 nodes and a replication factor of 5: lookup=5.364275203846389 μs, size=105.99880409240723 Mb.
+With 200 nodes and a replication factor of 5: lookup=5.3238332402718305 μs, size=106.0023889541626 Mb.
+With 210 nodes and a replication factor of 5: lookup=5.384019790411565 μs, size=106.00610256195068 Mb.
+With 220 nodes and a replication factor of 5: lookup=5.478951589317206 μs, size=106.00964546203613 Mb.
+With 230 nodes and a replication factor of 5: lookup=5.580964165695628 μs, size=106.0132942199707 Mb.
+With 240 nodes and a replication factor of 5: lookup=5.716077153495976 μs, size=106.01682186126709 Mb.
+With 250 nodes and a replication factor of 5: lookup=7.123428719879436 μs, size=106.02045154571533 Mb.
+With 260 nodes and a replication factor of 5: lookup=5.804513240537942 μs, size=106.02402877807617 Mb.
+With 270 nodes and a replication factor of 5: lookup=5.974979940978708 μs, size=106.02760314941406 Mb.
+With 280 nodes and a replication factor of 5: lookup=5.936012301640348 μs, size=106.03111362457275 Mb.
+With 290 nodes and a replication factor of 5: lookup=5.8782361620301335 μs, size=106.03473377227783 Mb.
+With 300 nodes and a replication factor of 5: lookup=6.031485685546127 μs, size=106.03832817077637 Mb.
+With 310 nodes and a replication factor of 5: lookup=6.103654054617975 μs, size=106.04193496704102 Mb.
+With 20 nodes and a replication factor of 6: lookup=3.4472017895702325 μs, size=113.22304344177246 Mb.
+With 30 nodes and a replication factor of 6: lookup=3.47495319872973 μs, size=113.61573314666748 Mb.
+With 40 nodes and a replication factor of 6: lookup=3.9797606247179083 μs, size=113.6176176071167 Mb.
+With 50 nodes and a replication factor of 6: lookup=4.183167287996166 μs, size=113.61943817138672 Mb.
+With 60 nodes and a replication factor of 6: lookup=4.316969778337428 μs, size=113.62139129638672 Mb.
+With 70 nodes and a replication factor of 6: lookup=4.319513907696425 μs, size=114.92266654968262 Mb.
+With 80 nodes and a replication factor of 6: lookup=4.5154553333805 μs, size=114.92458724975586 Mb.
+With 90 nodes and a replication factor of 6: lookup=4.597546131539154 μs, size=114.92645072937012 Mb.
+With 100 nodes and a replication factor of 6: lookup=4.673933536342342 μs, size=115.21537590026855 Mb.
+With 110 nodes and a replication factor of 6: lookup=4.767039982543714 μs, size=116.21864223480225 Mb.
+With 120 nodes and a replication factor of 6: lookup=4.830803688454653 μs, size=116.64996147155762 Mb.
+With 130 nodes and a replication factor of 6: lookup=4.951123298088791 μs, size=116.65404510498047 Mb.
+With 140 nodes and a replication factor of 6: lookup=5.035280156855709 μs, size=116.6576042175293 Mb.
+With 150 nodes and a replication factor of 6: lookup=5.12208812627229 μs, size=116.6611909866333 Mb.
+With 160 nodes and a replication factor of 6: lookup=5.0739335386527395 μs, size=116.66490364074707 Mb.
+With 170 nodes and a replication factor of 6: lookup=5.200117005794487 μs, size=116.66860961914062 Mb.
+With 180 nodes and a replication factor of 6: lookup=5.221275747403718 μs, size=116.67209815979004 Mb.
+With 190 nodes and a replication factor of 6: lookup=5.358127165609669 μs, size=116.675705909729 Mb.
+With 200 nodes and a replication factor of 6: lookup=5.310621152064776 μs, size=116.67928123474121 Mb.
+With 210 nodes and a replication factor of 6: lookup=5.726474319843963 μs, size=116.68298721313477 Mb.
+With 220 nodes and a replication factor of 6: lookup=5.807428457357007 μs, size=116.68653392791748 Mb.
+With 230 nodes and a replication factor of 6: lookup=5.668417354345752 μs, size=116.69017887115479 Mb.
+With 240 nodes and a replication factor of 6: lookup=5.681208211504666 μs, size=116.69369888305664 Mb.
+With 250 nodes and a replication factor of 6: lookup=5.570202598218239 μs, size=116.69734764099121 Mb.
+With 260 nodes and a replication factor of 6: lookup=5.682030622392801 μs, size=116.7009162902832 Mb.
+With 270 nodes and a replication factor of 6: lookup=5.78635330655689 μs, size=116.70450401306152 Mb.
+With 280 nodes and a replication factor of 6: lookup=5.831545865258855 μs, size=116.70801830291748 Mb.
+With 290 nodes and a replication factor of 6: lookup=5.859247130830281 μs, size=116.7116470336914 Mb.
+With 300 nodes and a replication factor of 6: lookup=5.986600698054825 μs, size=116.71523380279541 Mb.
+With 310 nodes and a replication factor of 6: lookup=5.857732680826228 μs, size=116.71883869171143 Mb.
+
+
+
+
+
+-------------------------NODES = 300----------------------30000 Sample Titles-----------------REPLICATION_FACTOR = 1---------------------------------------------------------------
+For 3.33 %  failed nodes and a replication factor of  1 we had avergae hops of: 5.25
+For 6.67 %  failed nodes and a replication factor of  1 we had avergae hops of: 5.40
+For 10.00 %  failed nodes and a replication factor of  1 we had avergae hops of: 5.50
+For 13.33 %  failed nodes and a replication factor of  1 we had avergae hops of: 5.65
+For 16.67 %  failed nodes and a replication factor of  1 we had avergae hops of: 5.76
+For 20.00 %  failed nodes and a replication factor of  1 we had avergae hops of: 5.88
+For 23.33 %  failed nodes and a replication factor of  1 we had avergae hops of: 5.97
+For 26.67 %  failed nodes and a replication factor of  1 we had avergae hops of: 6.08
+For 30.00 %  failed nodes and a replication factor of  1 we had avergae hops of: 6.18
+For 33.33 %  failed nodes and a replication factor of  1 we had avergae hops of: 6.28
+For 36.67 %  failed nodes and a replication factor of  1 we had avergae hops of: 6.39
+For 40.00 %  failed nodes and a replication factor of  1 we had avergae hops of: 6.54
+For 43.33 %  failed nodes and a replication factor of  1 we had avergae hops of: 6.69
+For 46.67 %  failed nodes and a replication factor of  1 we had avergae hops of: 6.72
+For 50.00 %  failed nodes and a replication factor of  1 we had avergae hops of: 6.74
+
+
+-------------------------NODES = 300----------------------30000 Sample Titles-----------------REPLICATION_FACTOR = 2---------------------------------------------------------------
+
+
+For 3.33 %  failed nodes and a replication factor of  2 we had avergae hops of: 5.27
+For 6.67 %  failed nodes and a replication factor of  2 we had avergae hops of: 5.41
+For 10.00 %  failed nodes and a replication factor of  2 we had avergae hops of: 5.57
+For 13.33 %  failed nodes and a replication factor of  2 we had avergae hops of: 5.67
+For 16.67 %  failed nodes and a replication factor of  2 we had avergae hops of: 5.73
+For 20.00 %  failed nodes and a replication factor of  2 we had avergae hops of: 5.87
+For 23.33 %  failed nodes and a replication factor of  2 we had avergae hops of: 6.04
+For 26.67 %  failed nodes and a replication factor of  2 we had avergae hops of: 6.26
+For 30.00 %  failed nodes and a replication factor of  2 we had avergae hops of: 6.31
+For 33.33 %  failed nodes and a replication factor of  2 we had avergae hops of: 6.44
+For 36.67 %  failed nodes and a replication factor of  2 we had avergae hops of: 6.56
+For 40.00 %  failed nodes and a replication factor of  2 we had avergae hops of: 6.65
+For 43.33 %  failed nodes and a replication factor of  2 we had avergae hops of: 6.70
+For 46.67 %  failed nodes and a replication factor of  2 we had avergae hops of: 6.80
+For 50.00 %  failed nodes and a replication factor of  2 we had avergae hops of: 6.93
+
+
+-------------------------NODES = 300----------------------30000 Sample Titles-----------------REPLICATION_FACTOR = 3---------------------------------------------------------------
+
+
