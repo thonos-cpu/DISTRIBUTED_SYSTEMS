@@ -10,4 +10,4 @@ test/output.csv
 test/__pycache__/DHT.cpython-312.pyc
 test/__pycache__/node.cpython-312.pyc
 __pycache__/DHT.cpython-312.pyc
-
+*.pyc
