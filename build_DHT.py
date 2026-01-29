@@ -8,11 +8,11 @@ import os
 import random
 
 
-CSV_PATH = r"C:/Users/tasis/Desktop/sxoli/DISTRIBUTED_SYSTEMS/output.csv"
+CSV_PATH = r"C:/Users/tasis/Desktop/sxoli/DISTRIBUTED_SYSTEMS/output.csv" #where the dataset is stored
 PICKLE_PATH = r"C:/Users/tasis/Desktop/sxoli/DISTRIBUTED_SYSTEMS/my_dht.pkl"
 replication_factor = 3
 
-def make_chunks(n_rows: int, batch_size: int):
+def make_chunks(n_rows: int, batch_size: int): #function to split the data into batches
     chunks = []
     for start in range(0, n_rows, batch_size):
         end = min(start + batch_size, n_rows)
@@ -41,13 +41,13 @@ if __name__ == "__main__":
         print("No .pkl file found. Building new DHT...")
         df_info = pd.read_csv(CSV_PATH, usecols=["title"])
         n_rows = len(df_info)
-        batch_size = 50000
+        batch_size = 50000 #how big the batch size is. e.g. if its 50000 it means that data is split into chunks of 50000 rows
 
-        chunks = make_chunks(n_rows, batch_size)
-        d = DHT(m_bits=64)
+        chunks = make_chunks(n_rows, batch_size) #create the chuncks
+        d = DHT(m_bits=64) # create the dht table
         
         for i in range(300):
-            d.join(f"node{i}")
+            d.join(f"node{i}") #create 300 nodes
 
         start_time = time.perf_counter()
         
@@ -56,10 +56,13 @@ if __name__ == "__main__":
             for fut in futures:
                 pairs = fut.result()
                 for title, attrs in pairs:
-                    d.put(title, attrs, replication_factor)
+                    d.put(title, attrs, replication_factor) #insert the title as a key and the rest of the data concurently with the help of ProccessPoolExecutor
 
         with open(PICKLE_PATH, "wb") as f:
-            pickle.dump(d, f)
+            pickle.dump(d, f) #save the data into a .pkl file
+
+            # .pkl files are used to store a state of our code. something like a cell in Jupyter Notebook. this way
+            #we dont have to rebuild the DHT everytime we need to test something wasting
             
         print(f"Build completed in {time.perf_counter() - start_time:.2f} seconds.")
 
