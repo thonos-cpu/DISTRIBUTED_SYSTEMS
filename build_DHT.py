@@ -62,7 +62,7 @@ if __name__ == "__main__":
             pickle.dump(d, f) #save the data into a .pkl file
 
             # .pkl files are used to store a state of our code. something like a cell in Jupyter Notebook. this way
-            #we dont have to rebuild the DHT everytime we need to test something wasting
+            #we dont have to rebuild the DHT everytime we need to test something wasting around 25 sec
             
         print(f"Build completed in {time.perf_counter() - start_time:.2f} seconds.")
 
