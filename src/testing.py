@@ -1,7 +1,7 @@
 import pandas as pd
 import time
 from tqdm import tqdm
-from src.pastry.dht import PastryDHT
+from src.pastry.dht_pastry import PastryDHT
 
 # Διαδρομές Αρχείων
 DATA_CSV = r"C:/Users/stavr/Decentralised Data/data/data_movies_clean_utf8.csv"

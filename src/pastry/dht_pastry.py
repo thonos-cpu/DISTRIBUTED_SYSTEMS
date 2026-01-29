@@ -8,9 +8,9 @@ leaf sets and decentralized lookup.
 from typing import Optional, Any, List
 from concurrent.futures import ThreadPoolExecutor
 
-from .node import Node
+from .node_pastry import Node
 from ..common.hash_utils import hash_to_int
-from .utils import normalize_title
+from .utils_pastry import normalize_title
 import math
 
 class PastryDHT:

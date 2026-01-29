@@ -4,12 +4,12 @@ import random
 import string
 from concurrent.futures import ProcessPoolExecutor, as_completed
 from multiprocessing import cpu_count, freeze_support
-from .pastry.utils import normalize_title
+from .pastry.utils_pastry import normalize_title
 from tqdm import tqdm
 
 
 
-from src.pastry.dht import PastryDHT
+from src.pastry.dht_pastry import PastryDHT
 
 CSV_PATH = r"C:/Users/stavr/Decentralised Data/data/data_movies_clean_utf8.csv"
 BENCH_CSV_PATH = r"C:/Users/stavr/Decentralised Data/data/random_movie_names.csv"
