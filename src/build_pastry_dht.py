@@ -369,7 +369,9 @@ if __name__ == "__main__":
     print(f"[JOIN] Avg time: {sum(join_times)/len(join_times):.6f} sec")
     print(f"[LEAVE] Avg time: {sum(leave_times)/len(leave_times):.6f} sec")
 
-
+     # Επιλογή ενός τυχαίου κόμβου για να δούμε το Leaf Set του
+    sample_node = dht.nodes[0] 
+    print(f"Leaf Set of Node {sample_node.id_str}: {[n.id_str for n in sample_node.leaf_set]}")
 
 
 

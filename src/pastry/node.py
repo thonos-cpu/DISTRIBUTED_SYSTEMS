@@ -60,19 +60,23 @@ class Node:
 
         # 1. Έλεγχος στο Leaf Set
         if self.leaf_set:
-            # Αν το key_id είναι μέσα στο εύρος του leaf set
             if self.leaf_min <= key_id <= self.leaf_max:
                 closest_leaf = min(self.leaf_set + [self], key=lambda n: abs(n.id - key_id))
                 return closest_leaf
 
         # 2. Prefix Routing (Routing Table)
         l = common_prefix_len(self.id_str, key_str)
+        
+        # --- ΠΡΟΣΘΗΚΗ ΑΥΤΟΥ ΤΟΥ ΕΛΕΓΧΟΥ ---
+        if l == len(self.id_str):
+            return self
+        # ----------------------------------
+
         digit = hex_digit_at(key_str, l)
         next_node = self.routing_table[l][digit]
         
         if next_node is not None:
             return next_node
-
         # 3. Rare case / Fallback: Greedy routing
         # Αν αποτύχουν τα παραπάνω, βρες οποιονδήποτε γνωστό κόμβο που μειώνει την απόσταση
         all_known_nodes = [n for row in self.routing_table for n in row if n is not None]
