@@ -1,10 +1,3 @@
-"""
-Pastry DHT implementation with prefix-based routing,
-leaf sets and decentralized lookup.
-"""
-
-
-
 from typing import Optional, Any, List
 from concurrent.futures import ThreadPoolExecutor
 

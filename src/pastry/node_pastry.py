@@ -4,6 +4,7 @@ from .utils_pastry import common_prefix_len, hex_digit_at
 
 
 
+
 class Node:
     def __init__(self, node_id: int, b: int = 4, leaf_size: int = 4):
         self.id: int = node_id

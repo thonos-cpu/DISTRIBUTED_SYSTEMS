@@ -10,3 +10,4 @@ if __name__ == "__main__":
     # Παράδειγμα
     print(hash_to_int("Avatar"))
     print(hash_to_int(("Avatar", 1995)))
+

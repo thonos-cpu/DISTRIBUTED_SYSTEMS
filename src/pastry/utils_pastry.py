@@ -25,9 +25,6 @@ def normalize_title(title) -> str:
 
 
 def common_prefix_len(a: str, b: str) -> int:
-    """
-    Returns length of common prefix between two hex strings
-    """
     i = 0
     while i < min(len(a), len(b)) and a[i] == b[i]:
         i += 1
@@ -35,7 +32,4 @@ def common_prefix_len(a: str, b: str) -> int:
 
 
 def hex_digit_at(s: str, idx: int) -> int:
-    """
-    Returns integer value of hex digit at position idx
-    """
     return int(s[idx], 16)

@@ -9,6 +9,7 @@ from tqdm import tqdm
 
 
 
+
 from src.pastry.dht_pastry import PastryDHT
 
 CSV_PATH = r"C:/Users/stavr/Decentralised Data/data/data_movies_clean_utf8.csv"
@@ -393,8 +394,3 @@ if __name__ == "__main__":
         print(f"Βρέθηκαν {len(movies)} ταινίες | hops: {hops} | time: {t_lookup_end - t_lookup_start:.6f}s")
         for m in movies:
             print(f"- {m['title']} ({m.get('release_date', 'N/A')}) --> Node {node_id}")
-
-'''In our implementation, lookup is simulated as a full scan over all active nodes. 
-Therefore, the hop count corresponds to the total number of nodes in the system and remains 
-constant for all queries.'''
-
