@@ -435,7 +435,7 @@ SOFTWARE.
 
 ---
 
-**Project Status**: Active Development
+**Project Status**: Developed
 
 **Maintainer**: [@thonos-cpu](https://github.com/thonos-cpu)
 
