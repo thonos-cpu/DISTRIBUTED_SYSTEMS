@@ -41,14 +41,14 @@ A Distributed Hash Table is a class of distributed systems that provides a looku
 
 ## Features
 
-- ✅ **Distributed Key-Value Storage**: Store and retrieve data across multiple nodes
-- ✅ **Consistent Hashing**: Efficient key distribution and minimal data movement on node changes
-- ✅ **Node Discovery**: Dynamic node joining and leaving
-- ✅ **Fault Tolerance**: Handles node failures gracefully
-- ✅ **Replication**: Data redundancy for improved availability (if implemented)
-- ✅ **Scalable Architecture**: Supports dynamic network growth
-- ✅ **Efficient Routing**: Optimized lookup operations
-- ✅ **Python 3.8+ Compatible**: Modern Python implementation
+-  **Distributed Key-Value Storage**: Store and retrieve data across multiple nodes
+-  **Consistent Hashing**: Efficient key distribution and minimal data movement on node changes
+-  **Node Discovery**: Dynamic node joining and leaving
+-  **Fault Tolerance**: Handles node failures gracefully
+-  **Replication**: Data redundancy for improved availability (if implemented)
+-  **Scalable Architecture**: Supports dynamic network growth
+-  **Efficient Routing**: Optimized lookup operations
+-  **Python 3.8+ Compatible**: Modern Python implementation
 
 ## Architecture
 
